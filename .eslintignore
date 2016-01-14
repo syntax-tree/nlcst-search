@@ -1,0 +1,4 @@
+components/
+coverage/
+nlcst-search.js
+nlcst-search.min.js

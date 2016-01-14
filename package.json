@@ -1,0 +1,55 @@
+{
+  "name": "nlcst-search",
+  "version": "0.0.0",
+  "description": "Search for patterns in an NLCST tree",
+  "license": "MIT",
+  "keywords": [
+    "pattern",
+    "search",
+    "nlcst",
+    "retext",
+    "utility"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/nlcst-search.git"
+  },
+  "bugs": "https://github.com/wooorm/nlcst-search/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "dependencies": {
+    "nlcst-is-literal": "^1.0.0",
+    "nlcst-normalize": "^1.0.0",
+    "unist-util-visit": "^1.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "eslint": "^1.0.0",
+    "esmangle": "^1.0.0",
+    "istanbul": "^0.4.0",
+    "jscs": "^2.0.0",
+    "jscs-jsdoc": "^1.0.0",
+    "remark": "^3.0.0",
+    "remark-comment-config": "^2.0.2",
+    "remark-github": "^2.0.0",
+    "remark-lint": "^2.0.2",
+    "remark-slug": "^3.0.1",
+    "remark-validate-links": "^2.0.2",
+    "remark-yaml-config": "^2.0.0",
+    "tape": "^4.0.0"
+  },
+  "scripts": {
+    "build-md": "remark . --quiet --frail",
+    "build-bundle": "browserify index.js --bare -s nlcstSearch > nlcst-search.js",
+    "build-mangle": "esmangle nlcst-search.js > nlcst-search.min.js",
+    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
+    "lint-api": "eslint .",
+    "lint-style": "jscs --reporter inline .",
+    "lint": "npm run lint-api && npm run lint-style",
+    "test-api": "node test.js",
+    "test-coverage": "istanbul cover test.js",
+    "test": "npm run build && npm run lint && npm run test-coverage"
+  }
+}
