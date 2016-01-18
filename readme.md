@@ -63,7 +63,7 @@ search(tree, ['do blocklevel'], function (nodes) {
 
 ## API
 
-### `search(node, patterns, handler)`
+### `search(node, patterns, handler[, allowApostrophes])`
 
 Search for patterns in an NLCST tree.
 
@@ -83,7 +83,10 @@ Note that the algorithm ignores [literal][literal] words.
 *   `handler` ([`Function`][fn-handler])
     — Patterns to search for. If an `Object`, uses its keys.
     Each pattern is a space-delimited list of words, where each
-    word is normalized to remove casing, apostrophes, and dashes.
+    word is normalized to remove casing, apostrophes, and dashes;
+
+*   `allowApostrophes` (`boolean`, default: `false`)
+    — Do not strip apostrophes (but normalize them).
 
 **Throws**: `Error` — When not given `node` or `patterns`.
 

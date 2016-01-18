@@ -160,6 +160,19 @@ var tree = {
                     'value': 'this'
                 }
             ]
+        },
+        {
+            'type': 'WhiteSpaceNode',
+            'value': ' '
+        },
+        {
+            'type': 'WordNode',
+            'children': [
+                {
+                    'type': 'TextNode',
+                    'value': 'hell'
+                }
+            ]
         }
     ]
 };
@@ -169,7 +182,7 @@ var tree = {
  */
 
 test('search(tree, patterns, handle)', function (t) {
-    t.plan(39);
+    t.plan(40);
 
     t.throws(
         function () {
@@ -261,4 +274,8 @@ test('search(tree, patterns, handle)', function (t) {
         t.equal(parent, match[2], 'should pass the parent (phrases)');
         t.equal(phrase, match[3], 'should pass the phrase (phrases)');
     });
+
+    t.doesNotThrow(function () {
+        search(tree, ['he’ll'], null, true);
+    }, 'should not find non-apostrophe words when `allowApostrophes` is true');
 });

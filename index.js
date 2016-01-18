@@ -44,8 +44,11 @@ var T_WHITE_SPACE = 'WhiteSpaceNode';
  * @param {Object|Array.<string>} phrases - Phrases to
  *   search for.  When `object`, searches for its keys.
  * @param {Function} handler - Handler.
+ * @param {boolean} allowApostrophes - Do not strip
+ *   apostrophes, normalize them.
  */
-function search(tree, phrases, handler) {
+function search(tree, phrases, handler, allowApostrophes) {
+    var apos = allowApostrophes;
     var byWord = {};
     var length;
     var index;
@@ -58,7 +61,7 @@ function search(tree, phrases, handler) {
      * @param {string} phrase - Phrase to search for.
      */
     function handlePhrase(phrase) {
-        firstWord = normalize(phrase.split(C_SPACE, 1)[0]);
+        firstWord = normalize(phrase.split(C_SPACE, 1)[0], apos);
 
         if (has.call(byWord, firstWord)) {
             byWord[firstWord].push(phrase);
@@ -143,7 +146,7 @@ function search(tree, phrases, handler) {
             if (
                 !node ||
                 node.type !== T_WORD ||
-                normalize(expression[index]) !== normalize(node)
+                normalize(expression[index], apos) !== normalize(node, apos)
             ) {
                 return null;
             }
