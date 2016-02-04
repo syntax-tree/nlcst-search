@@ -177,7 +177,7 @@ function search(tree, phrases, handler, allowApostrophes) {
             return;
         }
 
-        word = normalize(node);
+        word = normalize(node, apos);
         phrases = has.call(byWord, word) ? byWord[word] : [];
         length = phrases.length;
         index = -1;
