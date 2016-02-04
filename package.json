@@ -33,9 +33,9 @@
     "jscs-jsdoc": "^1.0.0",
     "remark": "^3.0.0",
     "remark-comment-config": "^2.0.2",
-    "remark-github": "^3.0.0",
+    "remark-github": "^4.0.0",
     "remark-lint": "^2.0.2",
-    "remark-slug": "^3.0.1",
+    "remark-slug": "^4.0.0",
     "remark-validate-links": "^2.0.2",
     "remark-yaml-config": "^2.0.0",
     "tape": "^4.0.0"
