@@ -63,11 +63,9 @@ search(tree, ['do blocklevel'], function (nodes) {
 
 ## API
 
-### `search(node, patterns, handler[, allowApostrophes])`
+### `search(node, patterns, handler[, allowApostrophes | options])`
 
 Search for patterns in an NLCST tree.
-
-Note that the algorithm ignores [literal][literal] words.
 
 **Parameters**
 
@@ -76,17 +74,25 @@ Note that the algorithm ignores [literal][literal] words.
 *   `patterns` (`Array.<string>` or `Object`)
     — Patterns to search for. If an `Object`, uses its keys.
     Each pattern is a space-delimited list of words, where each
-    word is normalized to remove casing, apostrophes, and dashes.
+    word is [normalize][]d to remove casing, apostrophes, and dashes.
     Spaces in a pattern mean zero or more white space nodes in
     the tree.
 
 *   `handler` ([`Function`][fn-handler])
     — Patterns to search for. If an `Object`, uses its keys.
     Each pattern is a space-delimited list of words, where each
-    word is normalized to remove casing, apostrophes, and dashes;
+    word is [normalize][]d to remove casing, apostrophes, and dashes;
 
 *   `allowApostrophes` (`boolean`, default: `false`)
-    — Do not strip apostrophes (but normalize them).
+    — Do not strip apostrophes (but [normalize][] them).
+
+*   `options` (`Object`) — Configuration:
+
+    *   `allowApostrophes`  (`boolean`, default: `false`)
+        — See `allowApostrophes` above;
+
+    *   `allowLiterals`  (`boolean`, default: `false`)
+        — Include [literal][] phrases.
 
 **Throws**: `Error` — When not given `node` or `patterns`.
 
@@ -132,5 +138,7 @@ Handler invoked when a match is found.
 [nlcst-node]: https://github.com/wooorm/nlcst#node
 
 [literal]: https://github.com/wooorm/nlcst-is-literal
+
+[normalize]: https://github.com/wooorm/nlcst-normalize
 
 [fn-handler]: #function-handlernodes-index-parent-pattern

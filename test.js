@@ -131,6 +131,23 @@ var tree = {
             'children': [
                 {
                     'type': 'TextNode',
+                    'value': 'mellow'
+                }
+            ]
+        },
+        {
+            'type': 'PunctuationNode',
+            'value': ','
+        },
+        {
+            'type': 'WhiteSpaceNode',
+            'value': ' '
+        },
+        {
+            'type': 'WordNode',
+            'children': [
+                {
+                    'type': 'TextNode',
                     'value': 'that'
                 }
             ]
@@ -182,7 +199,7 @@ var tree = {
  */
 
 test('search(tree, patterns, handle)', function (t) {
-    t.plan(40);
+    t.plan(42);
 
     t.throws(
         function () {
@@ -263,8 +280,8 @@ test('search(tree, patterns, handle)', function (t) {
 
     position = -1;
     results = [
-        [tree.children.slice(14, 19), 14, tree, phrases[0]],
-        [[tree.children[14]], 14, tree, phrases[1]]
+        [tree.children.slice(17, 22), 17, tree, phrases[0]],
+        [[tree.children[17]], 17, tree, phrases[1]]
     ];
 
     search(tree, phrases, function (nodes, index, parent, phrase) {
@@ -278,4 +295,14 @@ test('search(tree, patterns, handle)', function (t) {
     t.doesNotThrow(function () {
         search(tree, ['he’ll'], null, true);
     }, 'should not find non-apostrophe words when `allowApostrophes` is true');
+
+    t.doesNotThrow(function () {
+        search(tree, ['mellow']);
+    }, 'should not find literals by default');
+
+    search(tree, ['mellow'], function () {
+        t.pass('should find literals when given `allowLiterals`');
+    }, {
+        'allowLiterals': true
+    });
 });

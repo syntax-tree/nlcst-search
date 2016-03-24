@@ -44,11 +44,12 @@ var T_WHITE_SPACE = 'WhiteSpaceNode';
  * @param {Object|Array.<string>} phrases - Phrases to
  *   search for.  When `object`, searches for its keys.
  * @param {Function} handler - Handler.
- * @param {boolean} allowApostrophes - Do not strip
- *   apostrophes, normalize them.
+ * @param {Object?} [options] - Configuration.
  */
-function search(tree, phrases, handler, allowApostrophes) {
-    var apos = allowApostrophes;
+function search(tree, phrases, handler, options) {
+    var settings = options || {};
+    var apos = settings.allowApostrophes || options;
+    var literals = settings.allowLiterals;
     var byWord = {};
     var length;
     var index;
@@ -173,7 +174,7 @@ function search(tree, phrases, handler, allowApostrophes) {
         var index;
         var result;
 
-        if (isLiteral(parent, position)) {
+        if (!literals && isLiteral(parent, position)) {
             return;
         }
 
