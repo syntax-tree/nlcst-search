@@ -131,6 +131,23 @@ var tree = {
             'children': [
                 {
                     'type': 'TextNode',
+                    'value': 'mellow'
+                }
+            ]
+        },
+        {
+            'type': 'PunctuationNode',
+            'value': ','
+        },
+        {
+            'type': 'WhiteSpaceNode',
+            'value': ' '
+        },
+        {
+            'type': 'WordNode',
+            'children': [
+                {
+                    'type': 'TextNode',
                     'value': 'that'
                 }
             ]
@@ -224,6 +241,12 @@ test('search(tree, patterns, handle)', function (t) {
         t.equal(parent, tree, 'should pass the parent (object)');
         t.equal(phrase, 'do', 'should pass the phrase (object)');
     });
+
+    var mellowNode;
+    search(tree, ['mellow'], function (nodes) {
+        mellowNode = nodes;
+    });
+    t.ok(mellowNode, 'should find the mellow node');
 
     search(tree, ['blocklevel'], function (nodes, index, parent, phrase) {
         var match = [tree.children[4]];
