@@ -242,6 +242,12 @@ test('search(tree, patterns, handle)', function (t) {
         t.equal(phrase, 'do', 'should pass the phrase (object)');
     });
 
+    var mellowNode;
+    search(tree, ['mellow'], function (nodes) {
+        mellowNode = nodes;
+    });
+    t.ok(mellowNode, 'should find the mellow node');
+
     search(tree, ['blocklevel'], function (nodes, index, parent, phrase) {
         var match = [tree.children[4]];
         t.deepEqual(nodes, match, 'should pass nodes (normalized 2)');
