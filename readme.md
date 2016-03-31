@@ -10,8 +10,8 @@ Search for patterns in an [NLCST][nlcst] tree.
 npm install nlcst-search
 ```
 
-**nlcst-search** is also available for [duo][duo-install], and as an
-AMD, CommonJS, and globals module, [uncompressed and compressed][releases].
+**nlcst-search** is also available as an AMD, CommonJS, and globals
+module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -120,8 +120,6 @@ Handler invoked when a match is found.
 [codecov]: https://codecov.io/github/wooorm/nlcst-search
 
 [npm-install]: https://docs.npmjs.com/cli/install
-
-[duo-install]: http://duojs.org/#getting-started
 
 [releases]: https://github.com/wooorm/nlcst-search/releases
 
