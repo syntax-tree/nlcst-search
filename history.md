@@ -2,6 +2,12 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+1.2.0 / 2016-03-31
+==================
+
+*   Add `allowLiterals` setting ([`0ff7358`](https://github.com/wooorm/nlcst-search/commit/0ff7358))
+*   Remove duo support ([`6ce86de`](https://github.com/wooorm/nlcst-search/commit/6ce86de))
+
 1.1.1 / 2016-02-04
 ==================
 
