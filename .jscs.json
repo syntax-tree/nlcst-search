@@ -9,7 +9,7 @@
   "requireQuotedKeysInObjects": true,
   "disallowQuotedKeysInObjects": false,
   "maximumLineLength": {
-    "value": 79,
+    "value": 80,
     "allExcept": [
       "regex",
       "urlComments"

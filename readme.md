@@ -84,12 +84,15 @@ Search for patterns in an NLCST tree.
     word is [normalize][]d to remove casing, apostrophes, and dashes;
 
 *   `allowApostrophes` (`boolean`, default: `false`)
-    — Do not strip apostrophes (but [normalize][] them).
+    — Configuration for [**nlcst-normalize**][normalize]);
 
 *   `options` (`Object`) — Configuration:
 
     *   `allowApostrophes`  (`boolean`, default: `false`)
-        — See `allowApostrophes` above;
+        — Configuration for [**nlcst-normalize**][normalize]);
+
+    *   `allowDashes`  (`boolean`, default: `false`)
+        — Configuration for [**nlcst-normalize**][normalize]);
 
     *   `allowLiterals`  (`boolean`, default: `false`)
         — Include [literal][] phrases.

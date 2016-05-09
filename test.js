@@ -190,6 +190,19 @@ var tree = {
                     'value': 'hell'
                 }
             ]
+        },
+        {
+            'type': 'WhiteSpaceNode',
+            'value': ' '
+        },
+        {
+            'type': 'WordNode',
+            'children': [
+                {
+                    'type': 'TextNode',
+                    'value': 'selfservice'
+                }
+            ]
         }
     ]
 };
@@ -199,7 +212,7 @@ var tree = {
  */
 
 test('search(tree, patterns, handle)', function (t) {
-    t.plan(42);
+    t.plan(68);
 
     t.throws(
         function () {
@@ -274,7 +287,7 @@ test('search(tree, patterns, handle)', function (t) {
 
     t.doesNotThrow(function () {
         search(tree, ['or that']);
-    }, 'should not include non-word and non-white-space nodes');
+    }, 'shouldn’t include non-word and non-white-space nodes');
 
     var phrases = ['that or this', 'that'];
 
@@ -292,13 +305,130 @@ test('search(tree, patterns, handle)', function (t) {
         t.equal(phrase, match[3], 'should pass the phrase (phrases)');
     });
 
+    /*
+     * Handler function is only invoked if match is found
+     * search will throw if a match is found and no handler
+     * is provided  the tree contains “hell” but not “he’ll”
+     * or “he'll”.
+     */
+
+    t.throws(function () {
+        search(tree, ['hell'], null);
+    }, 'should find non-apostrophe words when `allowApostrophes` is absent');
+
+    t.throws(function () {
+        search(tree, ['he’ll'], null);
+    }, 'should find smart apostrophe words when `allowApostrophes` is absent');
+
+    t.throws(function () {
+        search(tree, ['he\'ll'], null);
+    }, 'should find dumb apostrophe words when `allowApostrophes` is absent');
+
+    t.throws(function () {
+        search(tree, ['hell'], null, true);
+    }, 'should find non-apostrophe words when `allowApostrophes` is true');
+
     t.doesNotThrow(function () {
         search(tree, ['he’ll'], null, true);
-    }, 'should not find non-apostrophe words when `allowApostrophes` is true');
+    }, 'shouldn’t find smart apostrophe words when `allowApostrophes` is true');
+
+    t.doesNotThrow(function () {
+        search(tree, ['he\'ll'], null, true);
+    }, 'shouldn’t find dumb apostrophe words when `allowApostrophes` is true');
+
+    t.throws(function () {
+        search(tree, ['hell'], null, false);
+    }, 'should find non-apostrophe words when `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['he’ll'], null, false);
+    }, 'should find smart apostrophe words when `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['he\'ll'], null, false);
+    }, 'should find dumb apostrophe words when `allowApostrophes` is false');
+
+    /*
+     * The tree contains “selfservice” but not “self-service”
+     */
+
+    /* jscs:disable maximumLineLength */
+    t.throws(function () {
+        search(tree, ['selfservice'], null);
+    }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is absent');
+
+    t.throws(function () {
+        search(tree, ['self-service'], null);
+    }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is absent');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, false);
+    }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['self-service'], null, false);
+    }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, true);
+    }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is true');
+
+    t.throws(function () {
+        search(tree, ['self-service'], null, true);
+    }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is true');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, {'allowDashes': true});
+    }, 'should find non-dash words when `allowDashes` is true');
+
+    t.doesNotThrow(function () {
+        search(tree, ['self-service'], null, {'allowDashes': true});
+    }, 'shouldn’t find dash words when `allowDashes` is true');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, {'allowDashes': false});
+    }, 'should find non-dash words when `allowDashes` is false');
+
+    t.throws(function () {
+        search(tree, ['self-service'], null, {'allowDashes': false});
+    }, 'should find dash words when `allowDashes` is false');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, {'allowApostrophes': false, 'allowDashes': true});
+    }, 'should find non-dash words when `allowDashes` is true and `allowApostrophes` is false');
+
+    t.doesNotThrow(function () {
+        search(tree, ['self-service'], null, {'allowApostrophes': false, 'allowDashes': true});
+    }, 'shouldn’t find dash words when `allowDashes` is true and `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, {'allowApostrophes': false, 'allowDashes': false});
+    }, 'should find non-dash words when `allowDashes` is false and `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['self-service'], null, {'allowApostrophes': false, 'allowDashes': false});
+    }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is false');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, {'allowApostrophes': true, 'allowDashes': true});
+    }, 'should find non-dash words when `allowDashes` is true and `allowApostrophes` is true');
+
+    t.doesNotThrow(function () {
+        search(tree, ['self-service'], null, {'allowApostrophes': true, 'allowDashes': true});
+    }, 'shouldn’t find dash words when `allowDashes` is true and `allowApostrophes` is true');
+
+    t.throws(function () {
+        search(tree, ['selfservice'], null, {'allowApostrophes': true, 'allowDashes': false});
+    }, 'should find non-dash words when `allowDashes` is false and `allowApostrophes` is true');
+
+    t.throws(function () {
+        search(tree, ['self-service'], null, {'allowApostrophes': true, 'allowDashes': false});
+    }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is true');
+    /* jscs:enable maximumLineLength */
 
     t.doesNotThrow(function () {
         search(tree, ['mellow']);
-    }, 'should not find literals by default');
+    }, 'shouldn’t find literals by default');
 
     search(tree, ['mellow'], function () {
         t.pass('should find literals when given `allowLiterals`');
