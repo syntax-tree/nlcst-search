@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "nlcst-is-literal": "^1.0.0",
-    "nlcst-normalize": "../nlcst-normalize",
+    "nlcst-normalize": "^1.1.0",
     "unist-util-visit": "^1.0.0"
   },
   "devDependencies": {
