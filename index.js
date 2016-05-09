@@ -49,6 +49,7 @@ var T_WHITE_SPACE = 'WhiteSpaceNode';
 function search(tree, phrases, handler, options) {
     var settings = options || {};
     var apos = settings.allowApostrophes || options;
+    var dashes = settings.allowDashes || false;
     var literals = settings.allowLiterals;
     var byWord = {};
     var length;
@@ -62,7 +63,7 @@ function search(tree, phrases, handler, options) {
      * @param {string} phrase - Phrase to search for.
      */
     function handlePhrase(phrase) {
-        firstWord = normalize(phrase.split(C_SPACE, 1)[0], apos);
+        firstWord = normalize(phrase.split(C_SPACE, 1)[0], apos, dashes);
 
         if (has.call(byWord, firstWord)) {
             byWord[firstWord].push(phrase);
@@ -147,7 +148,8 @@ function search(tree, phrases, handler, options) {
             if (
                 !node ||
                 node.type !== T_WORD ||
-                normalize(expression[index], apos) !== normalize(node, apos)
+                normalize(expression[index], apos, dashes) !==
+                normalize(node, apos, dashes)
             ) {
                 return null;
             }
@@ -178,7 +180,7 @@ function search(tree, phrases, handler, options) {
             return;
         }
 
-        word = normalize(node, apos);
+        word = normalize(node, apos, dashes);
         phrases = has.call(byWord, word) ? byWord[word] : [];
         length = phrases.length;
         index = -1;
