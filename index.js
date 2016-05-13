@@ -63,7 +63,10 @@ function search(tree, phrases, handler, options) {
      * @param {string} phrase - Phrase to search for.
      */
     function handlePhrase(phrase) {
-        firstWord = normalize(phrase.split(C_SPACE, 1)[0], apos, dashes);
+        firstWord = normalize(phrase.split(C_SPACE, 1)[0], {
+            'allowApostrophes': apos,
+            'allowDashes': dashes
+        });
 
         if (has.call(byWord, firstWord)) {
             byWord[firstWord].push(phrase);
@@ -148,8 +151,15 @@ function search(tree, phrases, handler, options) {
             if (
                 !node ||
                 node.type !== T_WORD ||
-                normalize(expression[index], apos, dashes) !==
-                normalize(node, apos, dashes)
+                normalize(expression[index], {
+                    'allowApostrophes': apos,
+                    'allowDashes': dashes
+                })
+                !==
+                normalize(node, {
+                    'allowApostrophes': apos,
+                    'allowDashes': dashes
+                })
             ) {
                 return null;
             }
@@ -180,7 +190,10 @@ function search(tree, phrases, handler, options) {
             return;
         }
 
-        word = normalize(node, apos, dashes);
+        word = normalize(node, {
+            'allowApostrophes': apos,
+            'allowDashes': dashes
+        });
         phrases = has.call(byWord, word) ? byWord[word] : [];
         length = phrases.length;
         index = -1;
