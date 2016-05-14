@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+1.3.0 / 2016-05-14
+==================
+
+*   Add support for `allowDashes` ([`b7110fa`](https://github.com/wooorm/nlcst-search/commit/b7110fa))
+
 1.2.0 / 2016-03-31
 ==================
 
