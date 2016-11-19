@@ -20,43 +20,43 @@ var search = require('nlcst-search');
 var toString = require('nlcst-to-string');
 
 var tree = {
-    'type': 'SentenceNode',
-    'children': [
-        {
-            'type': 'WordNode',
-            'children': [
-                {'type': 'TextNode', 'value': 'Don'},
-                {'type': 'PunctuationNode', 'value': '’'},
-                {'type': 'TextNode', 'value': 't'}
-            ]
-        },
-        {'type': 'WhiteSpaceNode', 'value': ' '},
-        {
-            'type': 'WordNode',
-            'children': [
-                {'type': 'TextNode', 'value': 'do'}
-            ]
-        },
-        {'type': 'WhiteSpaceNode', 'value': ' '},
-        {
-            'type': 'WordNode',
-            'children': [
-                {'type': 'TextNode', 'value': 'Block'},
-                {'type': 'PunctuationNode', 'value': '-'},
-                {'type': 'TextNode', 'value': 'level'}
-            ]
-        }
-    ]
+  type: 'SentenceNode',
+  children: [
+    {
+      type: 'WordNode',
+      children: [
+        {type: 'TextNode', value: 'Don'},
+        {type: 'PunctuationNode', value: '’'},
+        {type: 'TextNode', value: 't'}
+      ]
+    },
+    {type: 'WhiteSpaceNode', value: ' '},
+    {
+      type: 'WordNode',
+      children: [
+        {type: 'TextNode', value: 'do'}
+      ]
+    },
+    {type: 'WhiteSpaceNode', value: ' '},
+    {
+      type: 'WordNode',
+      children: [
+        {type: 'TextNode', value: 'Block'},
+        {type: 'PunctuationNode', value: '-'},
+        {type: 'TextNode', value: 'level'}
+      ]
+    }
+  ]
 };
 
 
 search(tree, ['dont'], function (nodes) {
-    console.log(toString(nodes));
+  console.log(toString(nodes));
 });
 // Don’t
 
 search(tree, ['do blocklevel'], function (nodes) {
-    console.log(toString(nodes));
+  console.log(toString(nodes));
 });
 // do Block-level
 ```
