@@ -10,38 +10,32 @@
     "retext",
     "utility"
   ],
-  "files": [
-    "index.js"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/nlcst-search.git"
-  },
+  "repository": "https://github.com/wooorm/nlcst-search",
   "bugs": "https://github.com/wooorm/nlcst-search/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
     "has": "^1.0.1",
-    "nlcst-is-literal": "^1.0.0",
-    "nlcst-normalize": "^2.0.0",
+    "nlcst-is-literal": "^1.1.0",
+    "nlcst-normalize": "^2.1.0",
     "unist-util-visit": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
     "esmangle": "^1.0.0",
     "istanbul": "^0.4.0",
-    "remark": "^4.0.0",
-    "remark-comment-config": "^3.0.0",
-    "remark-github": "^4.0.0",
-    "remark-lint": "^3.0.0",
-    "remark-validate-links": "^3.0.0",
+    "remark-cli": "^2.1.0",
+    "remark-preset-wooorm": "^1.0.0",
     "tape": "^4.0.0",
     "xo": "^0.17.1"
   },
   "scripts": {
-    "build-md": "remark . --quiet --frail",
+    "build-md": "remark . --quiet --frail --output",
     "build-bundle": "browserify index.js --bare -s nlcstSearch > nlcst-search.js",
     "build-mangle": "esmangle nlcst-search.js > nlcst-search.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
@@ -58,5 +52,8 @@
     "ignore": [
       "nlcst-search.js"
     ]
+  },
+  "remarkConfig": {
+    "presets": "wooorm"
   }
 }
