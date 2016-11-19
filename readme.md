@@ -4,14 +4,11 @@ Search for patterns in an [NLCST][nlcst] tree.
 
 ## Installation
 
-[npm][npm-install]:
+[npm][]:
 
 ```bash
 npm install nlcst-search
 ```
-
-**nlcst-search** is also available as an AMD, CommonJS, and globals
-module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -63,56 +60,50 @@ search(tree, ['do blocklevel'], function (nodes) {
 
 ## API
 
-### `search(node, patterns, handler[, allowApostrophes | options])`
+### `search(node, patterns, handler[, allowApostrophes|options])`
 
 Search for patterns in an NLCST tree.
 
-**Parameters**
+###### Parameters
 
 *   `node` ([`Node`][nlcst-node]) — Tree to search in;
-
 *   `patterns` (`Array.<string>` or `Object`)
-    — Patterns to search for. If an `Object`, uses its keys.
+    — Patterns to search for.  If an `Object`, uses its keys.
     Each pattern is a space-delimited list of words, where each
     word is [normalize][]d to remove casing, apostrophes, and dashes.
     Spaces in a pattern mean zero or more white space nodes in
     the tree.
-
 *   `handler` ([`Function`][fn-handler])
-    — Patterns to search for. If an `Object`, uses its keys.
-    Each pattern is a space-delimited list of words, where each
-    word is [normalize][]d to remove casing, apostrophes, and dashes;
-
+    — Handler invoked when a match is found.
 *   `allowApostrophes` (`boolean`, default: `false`)
     — Configuration for [**nlcst-normalize**][normalize]);
-
-*   `options` (`Object`) — Configuration:
-
+*   `options` (`Object`)
+    — Configuration:
     *   `allowApostrophes`  (`boolean`, default: `false`)
         — Configuration for [**nlcst-normalize**][normalize]);
-
     *   `allowDashes`  (`boolean`, default: `false`)
         — Configuration for [**nlcst-normalize**][normalize]);
-
     *   `allowLiterals`  (`boolean`, default: `false`)
         — Include [literal][] phrases.
 
-**Throws**: `Error` — When not given `node` or `patterns`.
+###### Throws
+
+`Error` — When not given `node` or `patterns`.
 
 ## `function handler(nodes, index, parent, pattern)`
 
 Handler invoked when a match is found.
 
-**Parameters**
+###### Parameters
 
 *   `nodes` ([`Array.<Node>`][nlcst-node])
     — List of siblings which match `pattern`;
-
-*   `index` (`number`) — Position at which the match starts in `parent`;
-
-*   `parent` ([`Node`][nlcst-node]) — Parent node of `nodes`;
-
-*   `pattern` (`string`) — The matched pattern.
+*   `index` (`number`)
+    — Position at which the match starts in `parent`;
+*   `parent` ([`Node`][nlcst-node])
+    — Parent node of `nodes`;
+*   `pattern` (`string`)
+    — The matched pattern.
 
 ## License
 
@@ -128,9 +119,7 @@ Handler invoked when a match is found.
 
 [codecov]: https://codecov.io/github/wooorm/nlcst-search
 
-[npm-install]: https://docs.npmjs.com/cli/install
-
-[releases]: https://github.com/wooorm/nlcst-search/releases
+[npm]: https://docs.npmjs.com/cli/install
 
 [license]: LICENSE
 
