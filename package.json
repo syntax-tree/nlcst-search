@@ -10,8 +10,8 @@
     "retext",
     "utility"
   ],
-  "repository": "https://github.com/wooorm/nlcst-search",
-  "bugs": "https://github.com/wooorm/nlcst-search/issues",
+  "repository": "https://github.com/syntax-tree/nlcst-search",
+  "bugs": "https://github.com/syntax-tree/nlcst-search/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"

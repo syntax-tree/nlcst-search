@@ -66,7 +66,7 @@ Search for patterns in an NLCST tree.
 
 ###### Parameters
 
-*   `node` ([`Node`][nlcst-node]) — Tree to search in;
+*   `node` ([`Node`][node]) — Tree to search in;
 *   `patterns` (`Array.<string>` or `Object`)
     — Patterns to search for.  If an `Object`, uses its keys.
     Each pattern is a space-delimited list of words, where each
@@ -96,11 +96,11 @@ Handler invoked when a match is found.
 
 ###### Parameters
 
-*   `nodes` ([`Array.<Node>`][nlcst-node])
+*   `nodes` ([`Array.<Node>`][node])
     — List of siblings which match `pattern`;
 *   `index` (`number`)
     — Position at which the match starts in `parent`;
-*   `parent` ([`Node`][nlcst-node])
+*   `parent` ([`Node`][node])
     — Parent node of `nodes`;
 *   `pattern` (`string`)
     — The matched pattern.
@@ -111,13 +111,13 @@ Handler invoked when a match is found.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/nlcst-search.svg
+[travis-badge]: https://img.shields.io/travis/syntax-tree/nlcst-search.svg
 
-[travis]: https://travis-ci.org/wooorm/nlcst-search
+[travis]: https://travis-ci.org/syntax-tree/nlcst-search
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/nlcst-search.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/syntax-tree/nlcst-search.svg
 
-[codecov]: https://codecov.io/github/wooorm/nlcst-search
+[codecov]: https://codecov.io/github/syntax-tree/nlcst-search
 
 [npm]: https://docs.npmjs.com/cli/install
 
@@ -125,12 +125,12 @@ Handler invoked when a match is found.
 
 [author]: http://wooorm.com
 
-[nlcst]: https://github.com/wooorm/nlcst
+[nlcst]: https://github.com/syntax-tree/nlcst
 
-[nlcst-node]: https://github.com/wooorm/nlcst#node
+[node]: https://github.com/syntax-tree/unist#node
 
-[literal]: https://github.com/wooorm/nlcst-is-literal
+[literal]: https://github.com/syntax-tree/nlcst-is-literal
 
-[normalize]: https://github.com/wooorm/nlcst-normalize
+[normalize]: https://github.com/syntax-tree/nlcst-normalize
 
 [fn-handler]: #function-handlernodes-index-parent-pattern
