@@ -20,7 +20,6 @@
     "index.js"
   ],
   "dependencies": {
-    "has": "^1.0.1",
     "nlcst-is-literal": "^1.1.0",
     "nlcst-normalize": "^2.1.0",
     "unist-util-visit": "^1.0.0"

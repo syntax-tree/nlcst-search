@@ -1,10 +1,11 @@
 'use strict';
 
 /* Dependencies. */
-var has = require('has');
 var visit = require('unist-util-visit');
 var normalize = require('nlcst-normalize');
 var isLiteral = require('nlcst-is-literal');
+
+var own = {}.hasOwnProperty;
 
 /* Expose. */
 module.exports = search;
@@ -112,7 +113,7 @@ function search(tree, phrases, handler, options) {
     }
 
     word = normalize(node, config);
-    phrases = has(byWord, word) ? byWord[word] : [];
+    phrases = own.call(byWord, word) ? byWord[word] : [];
     length = phrases.length;
     index = -1;
 
@@ -129,7 +130,7 @@ function search(tree, phrases, handler, options) {
   function handlePhrase(phrase) {
     firstWord = normalize(phrase.split(C_SPACE, 1)[0], config);
 
-    if (has(byWord, firstWord)) {
+    if (own.call(byWord, firstWord)) {
       byWord[firstWord].push(phrase);
     } else {
       byWord[firstWord] = [phrase];
