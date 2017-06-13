@@ -66,25 +66,25 @@ Search for patterns in an NLCST tree.
 
 ###### Parameters
 
-*   `node` ([`Node`][node]) — Tree to search in;
+*   `node` ([`Node`][node]) — Tree to search in
 *   `patterns` (`Array.<string>` or `Object`)
     — Patterns to search for.  If an `Object`, uses its keys.
     Each pattern is a space-delimited list of words, where each
     word is [normalize][]d to remove casing, apostrophes, and dashes.
     Spaces in a pattern mean zero or more white space nodes in
-    the tree.
+    the tree
 *   `handler` ([`Function`][fn-handler])
-    — Handler invoked when a match is found.
+    — Handler invoked when a match is found
 *   `allowApostrophes` (`boolean`, default: `false`)
-    — Configuration for [**nlcst-normalize**][normalize]);
+    — Configuration for [**nlcst-normalize**][normalize])
 *   `options` (`Object`)
     — Configuration:
     *   `allowApostrophes`  (`boolean`, default: `false`)
-        — Configuration for [**nlcst-normalize**][normalize]);
+        — Configuration for [**nlcst-normalize**][normalize])
     *   `allowDashes`  (`boolean`, default: `false`)
-        — Configuration for [**nlcst-normalize**][normalize]);
+        — Configuration for [**nlcst-normalize**][normalize])
     *   `allowLiterals`  (`boolean`, default: `false`)
-        — Include [literal][] phrases.
+        — Include [literal][] phrases
 
 ###### Throws
 
@@ -97,13 +97,13 @@ Handler invoked when a match is found.
 ###### Parameters
 
 *   `nodes` ([`Array.<Node>`][node])
-    — List of siblings which match `pattern`;
+    — List of siblings which match `pattern`
 *   `index` (`number`)
-    — Position at which the match starts in `parent`;
+    — Position at which the match starts in `parent`
 *   `parent` ([`Node`][node])
-    — Parent node of `nodes`;
+    — Parent node of `nodes`
 *   `pattern` (`string`)
-    — The matched pattern.
+    — The matched pattern
 
 ## License
 
