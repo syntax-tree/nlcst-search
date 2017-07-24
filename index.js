@@ -1,21 +1,17 @@
 'use strict';
 
-/* Dependencies. */
 var visit = require('unist-util-visit');
 var normalize = require('nlcst-normalize');
 var isLiteral = require('nlcst-is-literal');
 
 var own = {}.hasOwnProperty;
 
-/* Expose. */
 module.exports = search;
 
-/* Constants. */
 var C_SPACE = ' ';
 var T_WORD = 'WordNode';
 var T_WHITE_SPACE = 'WhiteSpaceNode';
 
-/* Search. */
 function search(tree, phrases, handler, options) {
   var settings = options || {};
   var apos = settings.allowApostrophes || options;
