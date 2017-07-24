@@ -14,7 +14,9 @@
   "bugs": "https://github.com/syntax-tree/nlcst-search/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+    "Dave Newton <dave.newton@shopify.com>",
+    "Tom MacWright <tom@macwright.org>"
   ],
   "files": [
     "index.js"
