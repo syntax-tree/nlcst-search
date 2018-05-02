@@ -13,8 +13,8 @@ npm install nlcst-search
 ## Usage
 
 ```js
-var search = require('nlcst-search');
-var toString = require('nlcst-to-string');
+var search = require('nlcst-search')
+var toString = require('nlcst-to-string')
 
 var tree = {
   type: 'SentenceNode',
@@ -30,9 +30,7 @@ var tree = {
     {type: 'WhiteSpaceNode', value: ' '},
     {
       type: 'WordNode',
-      children: [
-        {type: 'TextNode', value: 'do'}
-      ]
+      children: [{type: 'TextNode', value: 'do'}]
     },
     {type: 'WhiteSpaceNode', value: ' '},
     {
@@ -44,17 +42,16 @@ var tree = {
       ]
     }
   ]
-};
+}
 
-
-search(tree, ['dont'], function (nodes) {
-  console.log(toString(nodes));
-});
+search(tree, ['dont'], function(nodes) {
+  console.log(toString(nodes))
+})
 // Don’t
 
-search(tree, ['do blocklevel'], function (nodes) {
-  console.log(toString(nodes));
-});
+search(tree, ['do blocklevel'], function(nodes) {
+  console.log(toString(nodes))
+})
 // do Block-level
 ```
 
