@@ -126,7 +126,7 @@ The matched pattern (`string`).
 
 ## Contribute
 
-See [`contribute.md` in `syntax-tree/nlcst`][contribute] for ways to get
+See [`contributing.md` in `syntax-tree/nlcst`][contributing] for ways to get
 started.
 
 This organisation has a [Code of Conduct][coc].  By interacting with this
@@ -162,6 +162,6 @@ repository, organisation, or community you agree to abide by its terms.
 
 [fn-handler]: #function-handlernodes-index-parent-pattern
 
-[contribute]: https://github.com/syntax-tree/nlcst/blob/master/contributing.md
+[contributing]: https://github.com/syntax-tree/nlcst/blob/master/contributing.md
 
 [coc]: https://github.com/syntax-tree/nlcst/blob/master/code-of-conduct.md
