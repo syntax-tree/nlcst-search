@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var search = require('./');
+var search = require('.');
 
 var tree = {
   type: 'SentenceNode',

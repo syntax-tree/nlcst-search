@@ -27,13 +27,13 @@
     "unist-util-visit": "^1.0.0"
   },
   "devDependencies": {
-    "browserify": "^14.0.0",
+    "browserify": "^16.0.0",
     "esmangle": "^1.0.0",
     "nyc": "^11.0.2",
-    "remark-cli": "^4.0.0",
-    "remark-preset-wooorm": "^3.0.0",
+    "remark-cli": "^5.0.0",
+    "remark-preset-wooorm": "^4.0.0",
     "tape": "^4.0.0",
-    "xo": "^0.18.2"
+    "xo": "^0.20.0"
   },
   "scripts": {
     "build-md": "remark . --quiet --frail --output",
@@ -55,6 +55,9 @@
     "space": true,
     "esnext": false,
     "rules": {
+      "guard-for-in": "off",
+      "no-var": "off",
+      "prefer-arrow-callback": "off",
       "guard-for-in": "off",
       "unicorn/prefer-type-error": "off"
     },
