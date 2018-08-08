@@ -18,11 +18,10 @@ function search(tree, phrases, handler, options) {
   var dashes = settings.allowDashes || false
   var literals = settings.allowLiterals
   var config = {allowApostrophes: apos, allowDashes: dashes}
-  var byWord = {}
+  var byWord = {'*': []}
   var length
   var index
   var key
-  var firstWord
 
   if (!tree || !tree.type) {
     throw new Error('Expected node')
@@ -54,14 +53,15 @@ function search(tree, phrases, handler, options) {
     var node = siblings[position]
     var count = siblings.length
     var queue = [node]
-    var expression = phrase.split(C_SPACE).slice(1)
-    var length = expression.length
+    var expressions = phrase.split(C_SPACE).slice(1)
+    var length = expressions.length
     var index = -1
+    var expression
 
     /* Move one position forward. */
     position++
 
-    /* Iterate over `expression`. */
+    /* Iterate over `expressions`. */
     while (++index < length) {
       /* Allow joining white-space. */
       while (position < count) {
@@ -76,6 +76,7 @@ function search(tree, phrases, handler, options) {
       }
 
       node = siblings[position]
+      expression = expressions[index]
 
       /* Exit if there are no nodes left, if the
        * current node is not a word, or if the
@@ -84,9 +85,10 @@ function search(tree, phrases, handler, options) {
       if (
         !node ||
         node.type !== T_WORD ||
-        normalize(expression[index], config) !== normalize(node, config)
+        (expression !== '*' &&
+          normalize(expression, config) !== normalize(node, config))
       ) {
-        return null
+        return
       }
 
       queue.push(node)
@@ -109,7 +111,7 @@ function search(tree, phrases, handler, options) {
     }
 
     word = normalize(node, config)
-    phrases = own.call(byWord, word) ? byWord[word] : []
+    phrases = byWord['*'].concat(own.call(byWord, word) ? byWord[word] : [])
     length = phrases.length
     index = -1
 
@@ -124,7 +126,7 @@ function search(tree, phrases, handler, options) {
 
   /* Handle a phrase. */
   function handlePhrase(phrase) {
-    firstWord = normalize(phrase.split(C_SPACE, 1)[0], config)
+    var firstWord = normalize(phrase.split(C_SPACE, 1)[0], config)
 
     if (own.call(byWord, firstWord)) {
       byWord[firstWord].push(phrase)

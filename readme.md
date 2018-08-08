@@ -1,6 +1,6 @@
 # nlcst-search [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-Search for patterns in an [NLCST][nlcst] tree.
+Search for patterns in an [NLCST][] tree.
 
 ## Installation
 
@@ -74,10 +74,12 @@ Tree to search in ([`Node`][node]).
 ###### `patterns`
 
 Patterns to search for (`Array.<string>` or `Object`).
-If an `Object`, uses its keys.  Each pattern is a space-delimited list of
-words, where each word is [normalize][]d to remove casing, apostrophes,
-and dashes.  Spaces in a pattern mean zero or more white space nodes in
-the tree.
+If an `Object`, uses its keys as patterns.
+Each pattern is a space-delimited list of words, where each word is
+[normalize][]d to remove casing, apostrophes, and dashes.
+Spaces in a pattern mean zero or more white space nodes in the tree.
+Instead of a word, it’s also possible to use a wildcard symbol (`*`, an
+asterisk), that matches any word in a pattern (`alpha * charlie`).
 
 ###### `handler`
 

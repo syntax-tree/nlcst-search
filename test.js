@@ -80,8 +80,6 @@ var tree = {
 }
 
 test('search(tree, patterns, handle)', function(t) {
-  t.plan(68)
-
   t.throws(
     function() {
       search()
@@ -176,15 +174,15 @@ test('search(tree, patterns, handle)', function(t) {
    * is provided  the tree contains “hell” but not “he’ll”
    * or “he'll”. */
   t.throws(function() {
-    search(tree, ['hell'], null)
+    search(tree, ['hell'])
   }, 'should find non-apostrophe words when `allowApostrophes` is absent')
 
   t.throws(function() {
-    search(tree, ['he’ll'], null)
+    search(tree, ['he’ll'])
   }, 'should find smart apostrophe words when `allowApostrophes` is absent')
 
   t.throws(function() {
-    search(tree, ["he'll"], null)
+    search(tree, ["he'll"])
   }, 'should find dumb apostrophe words when `allowApostrophes` is absent')
 
   t.throws(function() {
@@ -214,11 +212,11 @@ test('search(tree, patterns, handle)', function(t) {
   /* The tree contains “selfservice” but not “self-service” */
 
   t.throws(function() {
-    search(tree, ['selfservice'], null)
+    search(tree, ['selfservice'])
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is absent')
 
   t.throws(function() {
-    search(tree, ['self-service'], null)
+    search(tree, ['self-service'])
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is absent')
 
   t.throws(function() {
@@ -309,6 +307,22 @@ test('search(tree, patterns, handle)', function(t) {
     })
   }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is true')
 
+  t.throws(function() {
+    search(tree, ['this * selfservice'])
+  }, 'should support wild cards (#1)')
+
+  t.doesNotThrow(function() {
+    search(tree, ['that * selfservice'])
+  }, 'should support wild cards (#2)')
+
+  t.throws(function() {
+    search(tree, ['* selfservice'])
+  }, 'should support wild cards (#3)')
+
+  t.doesNotThrow(function() {
+    search(tree, ['* zelfzervice'])
+  }, 'should support wild cards (#4)')
+
   t.doesNotThrow(function() {
     search(tree, ['mellow'])
   }, 'shouldn’t find literals by default')
@@ -321,4 +335,6 @@ test('search(tree, patterns, handle)', function(t) {
     },
     {allowLiterals: true}
   )
+
+  t.end()
 })
