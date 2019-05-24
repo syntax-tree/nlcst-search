@@ -8,9 +8,9 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-Search for patterns in an [NLCST][] tree.
+[**nlcst**][nlcst] utility to search for patterns in a tree.
 
-## Installation
+## Install
 
 [npm][]:
 
@@ -67,7 +67,7 @@ search(tree, ['do blocklevel'], function(nodes) {
 
 ### `search(node, patterns, handler[, allowApostrophes|options])`
 
-Search for patterns in an NLCST tree.
+Search for patterns a [tree][].
 
 ##### Throws
 
@@ -77,7 +77,7 @@ Search for patterns in an NLCST tree.
 
 ###### `node`
 
-Tree to search in ([`Node`][node]).
+[Tree][] to search in ([`Node`][node]).
 
 ###### `patterns`
 
@@ -117,15 +117,15 @@ Handler invoked when a match is found.
 
 ###### `nodes`
 
-List of siblings which match `pattern` ([`Array.<Node>`][node]).
+List of [sibling][]s that match `pattern` ([`Array.<Node>`][node]).
 
 ###### `index`
 
-Position at which the match starts in `parent` (`number`).
+[Index][] where the match starts in `parent` (`number`).
 
 ###### `parent`
 
-Parent node of `nodes` ([`Node`][node]).
+[Parent][] node of `nodes` ([`Node`][node]).
 
 ###### `pattern`
 
@@ -133,11 +133,13 @@ The matched pattern (`string`).
 
 ## Contribute
 
-See [`contributing.md` in `syntax-tree/nlcst`][contributing] for ways to get
+See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
 started.
+See [`support.md`][support] for ways to get help.
 
-This organisation has a [Code of Conduct][coc].  By interacting with this
-repository, organisation, or community you agree to abide by its terms.
+This project has a [Code of Conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## License
 
@@ -177,6 +179,12 @@ repository, organisation, or community you agree to abide by its terms.
 
 [author]: https://wooorm.com
 
+[contributing]: https://github.com/syntax-tree/.github/blob/master/contributing.md
+
+[support]: https://github.com/syntax-tree/.github/blob/master/support.md
+
+[coc]: https://github.com/syntax-tree/.github/blob/master/code-of-conduct.md
+
 [nlcst]: https://github.com/syntax-tree/nlcst
 
 [node]: https://github.com/syntax-tree/unist#node
@@ -187,6 +195,10 @@ repository, organisation, or community you agree to abide by its terms.
 
 [fn-handler]: #function-handlernodes-index-parent-pattern
 
-[contributing]: https://github.com/syntax-tree/nlcst/blob/master/contributing.md
+[tree]: https://github.com/syntax-tree/unist#tree
 
-[coc]: https://github.com/syntax-tree/nlcst/blob/master/code-of-conduct.md
+[sibling]: https://github.com/syntax-tree/unist#sibling
+
+[index]: https://github.com/syntax-tree/unist#index
+
+[parent]: https://github.com/syntax-tree/unist#parent-1
