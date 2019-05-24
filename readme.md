@@ -1,4 +1,12 @@
-# nlcst-search [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# nlcst-search
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
+[![Sponsors][sponsors-badge]][collective]
+[![Backers][backers-badge]][collective]
+[![Chat][chat-badge]][chat]
 
 Search for patterns in an [NLCST][] tree.
 
@@ -137,13 +145,31 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/syntax-tree/nlcst-search.svg
+[build-badge]: https://img.shields.io/travis/syntax-tree/nlcst-search.svg
 
-[travis]: https://travis-ci.org/syntax-tree/nlcst-search
+[build]: https://travis-ci.org/syntax-tree/nlcst-search
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/syntax-tree/nlcst-search.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/syntax-tree/nlcst-search.svg
 
-[codecov]: https://codecov.io/github/syntax-tree/nlcst-search
+[coverage]: https://codecov.io/github/syntax-tree/nlcst-search
+
+[downloads-badge]: https://img.shields.io/npm/dm/nlcst-search.svg
+
+[downloads]: https://www.npmjs.com/package/nlcst-search
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/nlcst-search.svg
+
+[size]: https://bundlephobia.com/result?p=nlcst-search
+
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[collective]: https://opencollective.com/unified
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/syntax-tree
 
 [npm]: https://docs.npmjs.com/cli/install
 
