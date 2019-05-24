@@ -8,9 +8,8 @@ var own = {}.hasOwnProperty
 
 module.exports = search
 
-var C_SPACE = ' '
-var T_WORD = 'WordNode'
-var T_WHITE_SPACE = 'WhiteSpaceNode'
+var word = 'WordNode'
+var whiteSpace = 'WhiteSpaceNode'
 
 function search(tree, phrases, handler, options) {
   var settings = options || {}
@@ -45,7 +44,7 @@ function search(tree, phrases, handler, options) {
   }
 
   // Search the tree.
-  visit(tree, T_WORD, visitor)
+  visit(tree, word, visitor)
 
   // Test a phrase.
   function test(phrase, position, parent) {
@@ -53,7 +52,7 @@ function search(tree, phrases, handler, options) {
     var node = siblings[position]
     var count = siblings.length
     var queue = [node]
-    var expressions = phrase.split(C_SPACE).slice(1)
+    var expressions = phrase.split(' ').slice(1)
     var length = expressions.length
     var index = -1
     var expression
@@ -67,7 +66,7 @@ function search(tree, phrases, handler, options) {
       while (position < count) {
         node = siblings[position]
 
-        if (node.type !== T_WHITE_SPACE) {
+        if (node.type !== whiteSpace) {
           break
         }
 
@@ -82,7 +81,7 @@ function search(tree, phrases, handler, options) {
       // if the current word does not match the search for value.
       if (
         !node ||
-        node.type !== T_WORD ||
+        node.type !== word ||
         (expression !== '*' &&
           normalize(expression, config) !== normalize(node, config))
       ) {
@@ -124,7 +123,7 @@ function search(tree, phrases, handler, options) {
 
   // Handle a phrase.
   function handlePhrase(phrase) {
-    var firstWord = normalize(phrase.split(C_SPACE, 1)[0], config)
+    var firstWord = normalize(phrase.split(' ', 1)[0], config)
 
     if (own.call(byWord, firstWord)) {
       byWord[firstWord].push(phrase)
