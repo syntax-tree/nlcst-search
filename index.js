@@ -44,10 +44,10 @@ function search(tree, phrases, handler, options) {
     }
   }
 
-  /* Search the tree. */
+  // Search the tree.
   visit(tree, T_WORD, visitor)
 
-  /* Test a phrase.   */
+  // Test a phrase.
   function test(phrase, position, parent) {
     var siblings = parent.children
     var node = siblings[position]
@@ -58,12 +58,12 @@ function search(tree, phrases, handler, options) {
     var index = -1
     var expression
 
-    /* Move one position forward. */
+    // Move one position forward.
     position++
 
-    /* Iterate over `expressions`. */
+    // Iterate over `expressions`.
     while (++index < length) {
-      /* Allow joining white-space. */
+      // Allow joining white-space.
       while (position < count) {
         node = siblings[position]
 
@@ -78,10 +78,8 @@ function search(tree, phrases, handler, options) {
       node = siblings[position]
       expression = expressions[index]
 
-      /* Exit if there are no nodes left, if the
-       * current node is not a word, or if the
-       * current word does not match the search for
-       * value. */
+      // Exit if there are no nodes left, if the current node is not a word, or
+      // if the current word does not match the search for value.
       if (
         !node ||
         node.type !== T_WORD ||
@@ -98,7 +96,7 @@ function search(tree, phrases, handler, options) {
     return queue
   }
 
-  /* Visitor for `WordNode`s.   */
+  // Visitor for `WordNode`s.
   function visitor(node, position, parent) {
     var word
     var phrases
@@ -124,7 +122,7 @@ function search(tree, phrases, handler, options) {
     }
   }
 
-  /* Handle a phrase. */
+  // Handle a phrase.
   function handlePhrase(phrase) {
     var firstWord = normalize(phrase.split(C_SPACE, 1)[0], config)
 
