@@ -28,9 +28,9 @@
     "index.js"
   ],
   "dependencies": {
-    "nlcst-is-literal": "^1.1.0",
-    "nlcst-normalize": "^2.1.0",
-    "unist-util-visit": "^1.0.0"
+    "nlcst-is-literal": "^1.0.0",
+    "nlcst-normalize": "^2.0.0",
+    "unist-util-visit": "^2.0.0"
   },
   "devDependencies": {
     "browserify": "^16.0.0",
