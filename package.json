@@ -1,14 +1,16 @@
 {
   "name": "nlcst-search",
   "version": "1.5.1",
-  "description": "Search for patterns in an NLCST tree",
+  "description": "nlcst utility to search for patterns in a tree",
   "license": "MIT",
   "keywords": [
-    "pattern",
-    "search",
+    "unist",
     "nlcst",
-    "retext",
-    "utility"
+    "nlcst-util",
+    "util",
+    "utility",
+    "pattern",
+    "search"
   ],
   "repository": "syntax-tree/nlcst-search",
   "bugs": "https://github.com/syntax-tree/nlcst-search/issues",
