@@ -131,6 +131,13 @@ List of [sibling][]s that match `pattern` ([`Array.<Node>`][node]).
 
 The matched pattern (`string`).
 
+## Related
+
+*   [`nlcst-normalize`](https://github.com/syntax-tree/nlcst-normalize)
+    — Normalize a word for easier comparison
+*   [`nlcst-is-literal`](https://github.com/syntax-tree/nlcst-is-literal)
+    — Check whether a node is meant literally
+
 ## Contribute
 
 See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
