@@ -8,18 +8,14 @@ var own = {}.hasOwnProperty
 
 module.exports = search
 
-var word = 'WordNode'
-var whiteSpace = 'WhiteSpaceNode'
-
 function search(tree, phrases, handler, options) {
   var settings = options || {}
-  var apos = settings.allowApostrophes || options
-  var dashes = settings.allowDashes || false
-  var literals = settings.allowLiterals
-  var config = {allowApostrophes: apos, allowDashes: dashes}
+  var config = {
+    allowApostrophes: settings.allowApostrophes || options,
+    allowDashes: settings.allowDashes
+  }
   var byWord = {'*': []}
-  var length
-  var index
+  var index = -1
   var key
 
   if (!tree || !tree.type) {
@@ -30,11 +26,8 @@ function search(tree, phrases, handler, options) {
     throw new Error('Expected object for phrases')
   }
 
-  length = phrases.length
-  index = -1
-
   if ('length' in phrases) {
-    while (++index < length) {
+    while (++index < phrases.length) {
       handlePhrase(phrases[index])
     }
   } else {
@@ -44,75 +37,60 @@ function search(tree, phrases, handler, options) {
   }
 
   // Search the tree.
-  visit(tree, word, visitor)
+  visit(tree, 'WordNode', visitor)
 
   // Test a phrase.
   function test(phrase, position, parent) {
     var siblings = parent.children
-    var node = siblings[position]
-    var count = siblings.length
-    var queue = [node]
+    var start = position
     var expressions = phrase.split(' ').slice(1)
-    var length = expressions.length
     var index = -1
-    var expression
 
     // Move one position forward.
     position++
 
     // Iterate over `expressions`.
-    while (++index < length) {
+    while (++index < expressions.length) {
       // Allow joining white-space.
-      while (position < count) {
-        node = siblings[position]
-
-        if (node.type !== whiteSpace) {
-          break
-        }
-
-        queue.push(node)
+      while (position < siblings.length) {
+        if (siblings[position].type !== 'WhiteSpaceNode') break
         position++
       }
-
-      node = siblings[position]
-      expression = expressions[index]
 
       // Exit if there are no nodes left, if the current node is not a word, or
       // if the current word does not match the search for value.
       if (
-        !node ||
-        node.type !== word ||
-        (expression !== '*' &&
-          normalize(expression, config) !== normalize(node, config))
+        !siblings[position] ||
+        siblings[position].type !== 'WordNode' ||
+        (expressions[index] !== '*' &&
+          normalize(expressions[index], config) !==
+            normalize(siblings[position], config))
       ) {
         return
       }
 
-      queue.push(node)
       position++
     }
 
-    return queue
+    return siblings.slice(start, position)
   }
 
   // Visitor for `WordNode`s.
   function visitor(node, position, parent) {
     var word
     var phrases
-    var length
     var index
     var result
 
-    if (!literals && isLiteral(parent, position)) {
+    if (!settings.allowLiterals && isLiteral(parent, position)) {
       return
     }
 
     word = normalize(node, config)
     phrases = byWord['*'].concat(own.call(byWord, word) ? byWord[word] : [])
-    length = phrases.length
     index = -1
 
-    while (++index < length) {
+    while (++index < phrases.length) {
       result = test(phrases[index], position, parent)
 
       if (result) {
