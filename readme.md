@@ -154,9 +154,9 @@ abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/syntax-tree/nlcst-search.svg
+[build-badge]: https://github.com/syntax-tree/nlcst-search/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/syntax-tree/nlcst-search
+[build]: https://github.com/syntax-tree/nlcst-search/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/syntax-tree/nlcst-search.svg
 
