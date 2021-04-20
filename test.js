@@ -1,7 +1,5 @@
-'use strict'
-
-var test = require('tape')
-var search = require('.')
+import test from 'tape'
+import {search} from './index.js'
 
 var tree = {
   type: 'SentenceNode',

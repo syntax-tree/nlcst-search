@@ -12,6 +12,9 @@
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -21,8 +24,8 @@ npm install nlcst-search
 ## Use
 
 ```js
-var search = require('nlcst-search')
-var toString = require('nlcst-to-string')
+import {search} from 'nlcst-search'
+import {toString} from 'nlcst-to-string'
 
 var tree = {
   type: 'SentenceNode',
@@ -64,6 +67,9 @@ search(tree, ['do blocklevel'], function(nodes) {
 ```
 
 ## API
+
+This package exports the following identifiers: `search`.
+There is no default export.
 
 ### `search(node, patterns, handler[, allowApostrophes|options])`
 

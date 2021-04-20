@@ -1,14 +1,10 @@
-'use strict'
-
-var visit = require('unist-util-visit')
-var normalize = require('nlcst-normalize')
-var isLiteral = require('nlcst-is-literal')
+import {visit} from 'unist-util-visit'
+import {normalize} from 'nlcst-normalize'
+import {isLiteral} from 'nlcst-is-literal'
 
 var own = {}.hasOwnProperty
 
-module.exports = search
-
-function search(tree, phrases, handler, options) {
+export function search(tree, phrases, handler, options) {
   var settings = options || {}
   var config = {
     allowApostrophes: settings.allowApostrophes || options,
@@ -23,7 +19,7 @@ function search(tree, phrases, handler, options) {
   }
 
   if (typeof phrases !== 'object') {
-    throw new Error('Expected object for phrases')
+    throw new TypeError('Expected object for phrases')
   }
 
   if ('length' in phrases) {
@@ -32,7 +28,9 @@ function search(tree, phrases, handler, options) {
     }
   } else {
     for (key in phrases) {
-      handlePhrase(key)
+      if (own.call(phrases, key)) {
+        handlePhrase(key)
+      }
     }
   }
 
