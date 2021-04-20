@@ -80,6 +80,7 @@ var tree = {
 test('search(tree, patterns, handle)', function (t) {
   t.throws(
     function () {
+      // @ts-ignore runtime.
       search()
     },
     /Error: Expected node/,
@@ -88,6 +89,7 @@ test('search(tree, patterns, handle)', function (t) {
 
   t.throws(
     function () {
+      // @ts-ignore runtime.
       search(tree)
     },
     /Error: Expected object for phrases/,

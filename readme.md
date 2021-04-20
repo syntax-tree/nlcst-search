@@ -71,7 +71,7 @@ search(tree, ['do blocklevel'], function(nodes) {
 This package exports the following identifiers: `search`.
 There is no default export.
 
-### `search(node, patterns, handler[, allowApostrophes|options])`
+### `search(tree, patterns, handler[, allowApostrophes|options])`
 
 Search for patterns a [tree][].
 
