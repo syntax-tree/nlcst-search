@@ -27,7 +27,7 @@ npm install nlcst-search
 import {search} from 'nlcst-search'
 import {toString} from 'nlcst-to-string'
 
-var tree = {
+const tree = {
   type: 'SentenceNode',
   children: [
     {

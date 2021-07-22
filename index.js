@@ -18,7 +18,7 @@ import {visit} from 'unist-util-visit'
 import {normalize} from 'nlcst-normalize'
 import {isLiteral} from 'nlcst-is-literal'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 /**
  * @param {Node} tree
@@ -28,12 +28,12 @@ var own = {}.hasOwnProperty
  */
 export function search(tree, phrases, handler, options) {
   /** @type {Object.<string, Array.<string>>} */
-  var byWord = {'*': []}
-  var index = -1
+  const byWord = {'*': []}
+  let index = -1
   /** @type {string} */
-  var key
+  let key
   /** @type {SearchOptions} */
-  var config
+  let config
 
   if (typeof options === 'boolean') {
     config = options ? {allowApostrophes: true} : {}
@@ -72,10 +72,10 @@ export function search(tree, phrases, handler, options) {
    * @param {Parent} parent
    */
   function test(phrase, position, parent) {
-    var siblings = parent.children
-    var start = position
-    var expressions = phrase.split(' ').slice(1)
-    var index = -1
+    const siblings = parent.children
+    const start = position
+    const expressions = phrase.split(' ').slice(1)
+    let index = -1
 
     // Move one position forward.
     position++
@@ -112,25 +112,18 @@ export function search(tree, phrases, handler, options) {
    * @type {Visitor}
    */
   function visitor(node, position, parent) {
-    /** @type {string} */
-    var word
-    /** @type {Array.<string>} */
-    var phrases
-    /** @type {number} */
-    var index
-    /** @type {Array.<Node>} */
-    var result
-
     if (!config.allowLiterals && isLiteral(parent, position)) {
       return
     }
 
-    word = normalize(node, config)
-    phrases = byWord['*'].concat(own.call(byWord, word) ? byWord[word] : [])
-    index = -1
+    const word = normalize(node, config)
+    const phrases = byWord['*'].concat(
+      own.call(byWord, word) ? byWord[word] : []
+    )
+    let index = -1
 
     while (++index < phrases.length) {
-      result = test(phrases[index], position, parent)
+      const result = test(phrases[index], position, parent)
 
       if (result) {
         handler(result, position, parent, phrases[index])
@@ -144,7 +137,7 @@ export function search(tree, phrases, handler, options) {
    * @param {string} phrase
    */
   function handlePhrase(phrase) {
-    var firstWord = normalize(phrase.split(' ', 1)[0], config)
+    const firstWord = normalize(phrase.split(' ', 1)[0], config)
 
     if (own.call(byWord, firstWord)) {
       byWord[firstWord].push(phrase)
