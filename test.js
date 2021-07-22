@@ -80,7 +80,7 @@ const tree = {
 test('search(tree, patterns, handle)', (t) => {
   t.throws(
     () => {
-      // @ts-ignore runtime.
+      // @ts-expect-error runtime.
       search()
     },
     /Error: Expected node/,
@@ -89,7 +89,7 @@ test('search(tree, patterns, handle)', (t) => {
 
   t.throws(
     () => {
-      // @ts-ignore runtime.
+      // @ts-expect-error runtime.
       search(tree)
     },
     /Error: Expected object for phrases/,
@@ -150,6 +150,7 @@ test('search(tree, patterns, handle)', (t) => {
   })
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['or that'])
   }, 'shouldn’t include non-word and non-white-space nodes')
 
@@ -174,84 +175,104 @@ test('search(tree, patterns, handle)', (t) => {
    * is provided  the tree contains “hell” but not “he’ll”
    * or “he'll”. */
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['hell'])
   }, 'should find non-apostrophe words when `allowApostrophes` is absent')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['he’ll'])
   }, 'should find smart apostrophe words when `allowApostrophes` is absent')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ["he'll"])
   }, 'should find dumb apostrophe words when `allowApostrophes` is absent')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['hell'], null, true)
   }, 'should find non-apostrophe words when `allowApostrophes` is true')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['he’ll'], null, true)
   }, 'shouldn’t find smart apostrophe words when `allowApostrophes` is true')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ["he'll"], null, true)
   }, 'shouldn’t find dumb apostrophe words when `allowApostrophes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['hell'], null, false)
   }, 'should find non-apostrophe words when `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['he’ll'], null, false)
   }, 'should find smart apostrophe words when `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ["he'll"], null, false)
   }, 'should find dumb apostrophe words when `allowApostrophes` is false')
 
   /* The tree contains “selfservice” but not “self-service” */
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'])
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is absent')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'])
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is absent')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, false)
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, false)
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, true)
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, true)
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {allowDashes: true})
   }, 'should find non-dash words when `allowDashes` is true')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {allowDashes: true})
   }, 'shouldn’t find dash words when `allowDashes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {allowDashes: false})
   }, 'should find non-dash words when `allowDashes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {allowDashes: false})
   }, 'should find dash words when `allowDashes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: false,
       allowDashes: true
@@ -259,6 +280,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'should find non-dash words when `allowDashes` is true and `allowApostrophes` is false')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: false,
       allowDashes: true
@@ -266,6 +288,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'shouldn’t find dash words when `allowDashes` is true and `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: false,
       allowDashes: false
@@ -273,6 +296,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'should find non-dash words when `allowDashes` is false and `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: false,
       allowDashes: false
@@ -280,6 +304,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is false')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: true,
       allowDashes: true
@@ -287,6 +312,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'should find non-dash words when `allowDashes` is true and `allowApostrophes` is true')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: true,
       allowDashes: true
@@ -294,6 +320,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'shouldn’t find dash words when `allowDashes` is true and `allowApostrophes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: true,
       allowDashes: false
@@ -301,6 +328,7 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'should find non-dash words when `allowDashes` is false and `allowApostrophes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: true,
       allowDashes: false
@@ -308,22 +336,27 @@ test('search(tree, patterns, handle)', (t) => {
   }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is true')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['this * selfservice'])
   }, 'should support wild cards (#1)')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['that * selfservice'])
   }, 'should support wild cards (#2)')
 
   t.throws(() => {
+    // @ts-expect-error: hush.
     search(tree, ['* selfservice'])
   }, 'should support wild cards (#3)')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['* zelfzervice'])
   }, 'should support wild cards (#4)')
 
   t.doesNotThrow(() => {
+    // @ts-expect-error: hush.
     search(tree, ['mellow'])
   }, 'shouldn’t find literals by default')
 

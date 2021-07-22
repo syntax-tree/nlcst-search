@@ -23,7 +23,7 @@ const own = {}.hasOwnProperty
 /**
  * @param {Node} tree
  * @param {PhrasesList|PhrasesMap} phrases
- * @param {Handler} [handler]
+ * @param {Handler} handler
  * @param {AllowApostrophes|SearchOptions} [options=false]
  */
 export function search(tree, phrases, handler, options) {
@@ -49,7 +49,7 @@ export function search(tree, phrases, handler, options) {
     throw new TypeError('Expected object for phrases')
   }
 
-  if ('length' in phrases) {
+  if (Array.isArray(phrases)) {
     while (++index < phrases.length) {
       handlePhrase(phrases[index])
     }
@@ -112,7 +112,11 @@ export function search(tree, phrases, handler, options) {
    * @type {Visitor}
    */
   function visitor(node, position, parent) {
-    if (!config.allowLiterals && isLiteral(parent, position)) {
+    if (
+      !parent ||
+      position === null ||
+      (!config.allowLiterals && isLiteral(parent, position))
+    ) {
       return
     }
 
