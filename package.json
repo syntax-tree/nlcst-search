@@ -36,7 +36,7 @@
     "@types/unist": "^2.0.0",
     "nlcst-is-literal": "^2.0.0",
     "nlcst-normalize": "^3.0.0",
-    "unist-util-visit": "^3.0.0"
+    "unist-util-visit": "^4.0.0"
   },
   "devDependencies": {
     "@types/tape": "^4.0.0",
