@@ -1,6 +1,11 @@
+/**
+ * @typedef {import('nlcst').Sentence} Sentence
+ */
+
 import test from 'tape'
 import {search} from './index.js'
 
+/** @type {Sentence} */
 const tree = {
   type: 'SentenceNode',
   children: [

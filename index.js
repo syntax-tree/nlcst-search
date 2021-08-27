@@ -1,17 +1,19 @@
 /**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-visit').Visitor<Node>} Visitor
+ * @typedef {import('unist').Parent} UnistParent
+ * @typedef {import('nlcst').Root} Root
+ * @typedef {import('nlcst').Word} Word
+ * @typedef {import('nlcst').Content} Content
+ * @typedef {Root|Content} Node
+ * @typedef {Extract<Node, UnistParent>} Parent
  * @typedef {import('nlcst-normalize').NormalizeOptions} NormalizeOptions
  *
  * @typedef {boolean} AllowApostrophes
- *
  * @typedef {NormalizeOptions & {allowLiterals?: boolean}} SearchOptions
  *
  * @typedef {Array.<string>} PhrasesList
  * @typedef {Object.<string, unknown>} PhrasesMap
  *
- * @typedef {(nodes: Array.<Node>, index: number, parent: Parent, pattern: string) => void} Handler
+ * @typedef {(nodes: Content[], index: number, parent: Parent, pattern: string) => void} Handler
  */
 
 import {visit} from 'unist-util-visit'
@@ -62,7 +64,31 @@ export function search(tree, phrases, handler, options) {
   }
 
   // Search the tree.
-  visit(tree, 'WordNode', visitor)
+  visit(tree, 'WordNode', (node, position, parent_) => {
+    const parent = /** @type {Parent} */ (parent_)
+
+    if (
+      !parent ||
+      position === null ||
+      (!config.allowLiterals && isLiteral(parent, position))
+    ) {
+      return
+    }
+
+    const word = normalize(node, config)
+    const phrases = byWord['*'].concat(
+      own.call(byWord, word) ? byWord[word] : []
+    )
+    let index = -1
+
+    while (++index < phrases.length) {
+      const result = test(phrases[index], position, parent)
+
+      if (result) {
+        handler(result, position, parent, phrases[index])
+      }
+    }
+  })
 
   /**
    * Test a phrase.
@@ -104,35 +130,6 @@ export function search(tree, phrases, handler, options) {
     }
 
     return siblings.slice(start, position)
-  }
-
-  /**
-   * Visitor for `WordNode`s.
-   *
-   * @type {Visitor}
-   */
-  function visitor(node, position, parent) {
-    if (
-      !parent ||
-      position === null ||
-      (!config.allowLiterals && isLiteral(parent, position))
-    ) {
-      return
-    }
-
-    const word = normalize(node, config)
-    const phrases = byWord['*'].concat(
-      own.call(byWord, word) ? byWord[word] : []
-    )
-    let index = -1
-
-    while (++index < phrases.length) {
-      const result = test(phrases[index], position, parent)
-
-      if (result) {
-        handler(result, position, parent, phrases[index])
-      }
-    }
   }
 
   /**
