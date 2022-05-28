@@ -75,10 +75,6 @@ There is no default export.
 
 Search for patterns a [tree][].
 
-##### Throws
-
-`Error` — When not given `node` or `patterns`.
-
 ##### Parameters
 
 ###### `node`
@@ -87,10 +83,10 @@ Search for patterns a [tree][].
 
 ###### `patterns`
 
-Patterns to search for (`Array.<string>` or `Object`).
+Patterns to search for (`Array<string>` or `Record<string, unknown>`).
 If an `Object`, uses its keys as patterns.
-Each pattern is a space-delimited list of words, where each word is
-[normalize][]d to remove casing, apostrophes, and dashes.
+Each pattern is a space-separated list of words, where each word is
+[normalized][nlcst-normalize] to remove casing, apostrophes, and dashes.
 Spaces in a pattern mean zero or more white space nodes in the tree.
 Instead of a word, it’s also possible to use a wildcard symbol (`*`, an
 asterisk), that matches any word in a pattern (`alpha * charlie`).
@@ -105,17 +101,17 @@ Treated as `options.allowApostrophes`.
 
 ###### `options.allowApostrophes`
 
-Passed to [`nlcst-normalize`][normalize] (`boolean`, default: `false`).
+Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
 
 ###### `options.allowDashes`
 
-Passed to [`nlcst-normalize`][normalize] (`boolean`, default: `false`).
+Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
 
 ###### `options.allowLiterals`
 
 Include [literal][] phrases (`boolean`, default: `false`).
 
-## `function handler(nodes, index, parent, pattern)`
+### `function handler(nodes, index, parent, pattern)`
 
 Handler invoked when a match is found.
 
@@ -123,7 +119,7 @@ Handler invoked when a match is found.
 
 ###### `nodes`
 
-List of [sibling][]s that match `pattern` ([`Array.<Node>`][node]).
+List of [sibling][]s that match `pattern` ([`Array<Node>`][node]).
 
 ###### `index`
 
@@ -204,7 +200,7 @@ abide by its terms.
 
 [literal]: https://github.com/syntax-tree/nlcst-is-literal
 
-[normalize]: https://github.com/syntax-tree/nlcst-normalize
+[nlcst-normalize]: https://github.com/syntax-tree/nlcst-normalize
 
 [fn-handler]: #function-handlernodes-index-parent-pattern
 

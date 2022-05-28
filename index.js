@@ -10,10 +10,10 @@
  * @typedef {boolean} AllowApostrophes
  * @typedef {NormalizeOptions & {allowLiterals?: boolean}} SearchOptions
  *
- * @typedef {Array.<string>} PhrasesList
- * @typedef {Object.<string, unknown>} PhrasesMap
+ * @typedef {Array<string>} PhrasesList
+ * @typedef {Record<string, unknown>} PhrasesMap
  *
- * @typedef {(nodes: Content[], index: number, parent: Parent, pattern: string) => void} Handler
+ * @typedef {(nodes: Array<Content>, index: number, parent: Parent, pattern: string) => void} Handler
  */
 
 import {visit} from 'unist-util-visit'
@@ -29,7 +29,7 @@ const own = {}.hasOwnProperty
  * @param {AllowApostrophes|SearchOptions} [options=false]
  */
 export function search(tree, phrases, handler, options) {
-  /** @type {Object.<string, Array.<string>>} */
+  /** @type {Record<string, Array<string>>} */
   const byWord = {'*': []}
   let index = -1
   /** @type {string} */
