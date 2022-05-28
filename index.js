@@ -8,12 +8,17 @@
  * @typedef {import('nlcst-normalize').NormalizeOptions} NormalizeOptions
  *
  * @typedef {boolean} AllowApostrophes
- * @typedef {NormalizeOptions & {allowLiterals?: boolean}} SearchOptions
- *
+ * @typedef {NormalizeOptions & {allowLiterals?: boolean}} Options
+ *   Configuration (optional).
  * @typedef {Array<string>} PhrasesList
+ *   List of phrases.
  * @typedef {Record<string, unknown>} PhrasesMap
- *
+ *   Map where the keys are phrases.
  * @typedef {(nodes: Array<Content>, index: number, parent: Parent, pattern: string) => void} Handler
+ *   Function called when a pattern matches.
+ *
+ * @typedef {Options} SearchOptions
+ *   Deprecated form of `Options`.
  */
 
 import {visit} from 'unist-util-visit'
@@ -26,7 +31,7 @@ const own = {}.hasOwnProperty
  * @param {Node} tree
  * @param {PhrasesList|PhrasesMap} phrases
  * @param {Handler} handler
- * @param {AllowApostrophes|SearchOptions} [options=false]
+ * @param {AllowApostrophes|Options} [options=false]
  */
 export function search(tree, phrases, handler, options) {
   /** @type {Record<string, Array<string>>} */
@@ -34,7 +39,7 @@ export function search(tree, phrases, handler, options) {
   let index = -1
   /** @type {string} */
   let key
-  /** @type {SearchOptions} */
+  /** @type {Options} */
   let config
 
   if (typeof options === 'boolean') {

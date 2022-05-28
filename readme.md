@@ -8,17 +8,53 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**nlcst**][nlcst] utility to search for patterns in a tree.
+[nlcst][] utility to search for patterns in a tree.
+
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`search(tree, patterns, handler[, allowApostrophes|options])`](#searchtree-patterns-handler-allowapostrophesoptions)
+    *   [`function handler(nodes, index, parent, pattern)`](#function-handlernodes-index-parent-pattern)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Related](#related)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This utility can search for patterns (words and phrases) in trees.
+
+## When should I use this?
+
+This package is a tiny utility that helps when you’re searching for words
+and phrases.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only][esm].
+In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
 
 ```sh
 npm install nlcst-search
+```
+
+In Deno with [`esm.sh`][esmsh]:
+
+```js
+import {search} from "https://esm.sh/nlcst-search@3"
+```
+
+In browsers with [`esm.sh`][esmsh]:
+
+```html
+<script type="module">
+  import {search} from "https://esm.sh/nlcst-search@3?bundle"
+</script>
 ```
 
 ## Use
@@ -68,7 +104,7 @@ search(tree, ['do blocklevel'], function(nodes) {
 
 ## API
 
-This package exports the following identifiers: `search`.
+This package exports the identifier `search`.
 There is no default export.
 
 ### `search(tree, patterns, handler[, allowApostrophes|options])`
@@ -93,7 +129,7 @@ asterisk), that matches any word in a pattern (`alpha * charlie`).
 
 ###### `handler`
 
-Handler invoked when a match is found ([`Function`][fn-handler]).
+Handler called when a match is found ([`Handler`][fn-handler]).
 
 ###### `allowApostrophes`
 
@@ -113,7 +149,7 @@ Include [literal][] phrases (`boolean`, default: `false`).
 
 ### `function handler(nodes, index, parent, pattern)`
 
-Handler invoked when a match is found.
+Handler called when a match is found.
 
 ##### Parameters
 
@@ -133,17 +169,30 @@ List of [sibling][]s that match `pattern` ([`Array<Node>`][node]).
 
 The matched pattern (`string`).
 
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports the additional types `Options`, `PhrasesList`, `PhrasesMap`, and
+`Handler`.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
+
 ## Related
 
 *   [`nlcst-normalize`](https://github.com/syntax-tree/nlcst-normalize)
-    — Normalize a word for easier comparison
+    — normalize a word for easier comparison
 *   [`nlcst-is-literal`](https://github.com/syntax-tree/nlcst-is-literal)
-    — Check whether a node is meant literally
+    — check whether a node is meant literally
 
 ## Contribute
 
-See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
-started.
+See [`contributing.md`][contributing] in [`syntax-tree/.github`][health] for
+ways to get started.
 See [`support.md`][support] for ways to get help.
 
 This project has a [code of conduct][coc].
@@ -184,15 +233,23 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esmsh]: https://esm.sh
+
+[typescript]: https://www.typescriptlang.org
+
 [license]: license
 
 [author]: https://wooorm.com
 
-[contributing]: https://github.com/syntax-tree/.github/blob/HEAD/contributing.md
+[health]: https://github.com/syntax-tree/.github
 
-[support]: https://github.com/syntax-tree/.github/blob/HEAD/support.md
+[contributing]: https://github.com/syntax-tree/.github/blob/main/contributing.md
 
-[coc]: https://github.com/syntax-tree/.github/blob/HEAD/code-of-conduct.md
+[support]: https://github.com/syntax-tree/.github/blob/main/support.md
+
+[coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
 
 [nlcst]: https://github.com/syntax-tree/nlcst
 
