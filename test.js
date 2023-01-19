@@ -2,7 +2,8 @@
  * @typedef {import('nlcst').Sentence} Sentence
  */
 
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {search} from './index.js'
 
 /** @type {Sentence} */
@@ -82,8 +83,8 @@ const tree = {
   ]
 }
 
-test('search(tree, patterns, handle)', (t) => {
-  t.throws(
+test('search', () => {
+  assert.throws(
     () => {
       // @ts-expect-error runtime.
       search()
@@ -92,7 +93,7 @@ test('search(tree, patterns, handle)', (t) => {
     'should throw when not given a tree'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       // @ts-expect-error runtime.
       search(tree)
@@ -102,34 +103,34 @@ test('search(tree, patterns, handle)', (t) => {
   )
 
   search(tree, ['Don’t'], (nodes, index, parent, phrase) => {
-    t.deepEqual(nodes, [tree.children[0]], 'should pass nodes')
-    t.equal(index, 0, 'should pass the correct index')
-    t.equal(parent, tree, 'should pass the parent')
-    t.equal(phrase, 'Don’t', 'should pass the phrase')
+    assert.deepEqual(nodes, [tree.children[0]], 'should pass nodes')
+    assert.equal(index, 0, 'should pass the correct index')
+    assert.equal(parent, tree, 'should pass the parent')
+    assert.equal(phrase, 'Don’t', 'should pass the phrase')
   })
 
   search(tree, ['Dont'], (nodes, index, parent, phrase) => {
     const match = [tree.children[0]]
-    t.deepEqual(nodes, match, 'should pass nodes (normalized)')
-    t.equal(index, 0, 'should pass the correct index (normalized)')
-    t.equal(parent, tree, 'should pass the parent (normalized)')
-    t.equal(phrase, 'Dont', 'should pass the phrase')
+    assert.deepEqual(nodes, match, 'should pass nodes (normalized)')
+    assert.equal(index, 0, 'should pass the correct index (normalized)')
+    assert.equal(parent, tree, 'should pass the parent (normalized)')
+    assert.equal(phrase, 'Dont', 'should pass the phrase')
   })
 
   search(tree, {do: true}, (nodes, index, parent, phrase) => {
     const match = [tree.children[2]]
-    t.deepEqual(nodes, match, 'should pass nodes (object)')
-    t.equal(index, 2, 'should pass the correct index (object)')
-    t.equal(parent, tree, 'should pass the parent (object)')
-    t.equal(phrase, 'do', 'should pass the phrase (object)')
+    assert.deepEqual(nodes, match, 'should pass nodes (object)')
+    assert.equal(index, 2, 'should pass the correct index (object)')
+    assert.equal(parent, tree, 'should pass the parent (object)')
+    assert.equal(phrase, 'do', 'should pass the phrase (object)')
   })
 
   search(tree, ['blocklevel'], (nodes, index, parent, phrase) => {
     const match = [tree.children[4]]
-    t.deepEqual(nodes, match, 'should pass nodes (normalized 2)')
-    t.equal(index, 4, 'should pass the correct index (normalized 2)')
-    t.equal(parent, tree, 'should pass the parent (normalized 2)')
-    t.equal(phrase, 'blocklevel', 'should pass the phrase')
+    assert.deepEqual(nodes, match, 'should pass nodes (normalized 2)')
+    assert.equal(index, 4, 'should pass the correct index (normalized 2)')
+    assert.equal(parent, tree, 'should pass the parent (normalized 2)')
+    assert.equal(phrase, 'blocklevel', 'should pass the phrase')
   })
 
   let position = -1
@@ -140,21 +141,21 @@ test('search(tree, patterns, handle)', (t) => {
 
   search(tree, ['dont', 'do'], (nodes, index, parent, phrase) => {
     const match = results[++position]
-    t.deepEqual(nodes, match[0], 'should pass nodes (phrases)')
-    t.equal(index, match[1], 'should pass the correct index (phrases)')
-    t.equal(parent, match[2], 'should pass the parent (phrases)')
-    t.equal(phrase, match[3], 'should pass the phrase (phrases)')
+    assert.deepEqual(nodes, match[0], 'should pass nodes (phrases)')
+    assert.equal(index, match[1], 'should pass the correct index (phrases)')
+    assert.equal(parent, match[2], 'should pass the parent (phrases)')
+    assert.equal(phrase, match[3], 'should pass the phrase (phrases)')
   })
 
   search(tree, ['dont do'], (nodes, index, parent, phrase) => {
     const match = tree.children.slice(0, 3)
-    t.deepEqual(nodes, match, 'should pass nodes (phrase)')
-    t.equal(index, 0, 'should pass the correct index (phrase)')
-    t.equal(parent, tree, 'should pass the parent (phrase)')
-    t.equal(phrase, 'dont do', 'should pass the phrase (phrase)')
+    assert.deepEqual(nodes, match, 'should pass nodes (phrase)')
+    assert.equal(index, 0, 'should pass the correct index (phrase)')
+    assert.equal(parent, tree, 'should pass the parent (phrase)')
+    assert.equal(phrase, 'dont do', 'should pass the phrase (phrase)')
   })
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['or that'])
   }, 'shouldn’t include non-word and non-white-space nodes')
@@ -169,114 +170,114 @@ test('search(tree, patterns, handle)', (t) => {
 
   search(tree, phrases, (nodes, index, parent, phrase) => {
     const match = results[++position]
-    t.deepEqual(nodes, match[0], 'should pass nodes (phrases)')
-    t.equal(index, match[1], 'should pass the correct index (phrases)')
-    t.equal(parent, match[2], 'should pass the parent (phrases)')
-    t.equal(phrase, match[3], 'should pass the phrase (phrases)')
+    assert.deepEqual(nodes, match[0], 'should pass nodes (phrases)')
+    assert.equal(index, match[1], 'should pass the correct index (phrases)')
+    assert.equal(parent, match[2], 'should pass the parent (phrases)')
+    assert.equal(phrase, match[3], 'should pass the phrase (phrases)')
   })
 
   /* Handler function is only invoked if match is found
    * search will throw if a match is found and no handler
    * is provided  the tree contains “hell” but not “he’ll”
    * or “he'll”. */
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['hell'])
   }, 'should find non-apostrophe words when `allowApostrophes` is absent')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['he’ll'])
   }, 'should find smart apostrophe words when `allowApostrophes` is absent')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ["he'll"])
   }, 'should find dumb apostrophe words when `allowApostrophes` is absent')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['hell'], null, true)
   }, 'should find non-apostrophe words when `allowApostrophes` is true')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['he’ll'], null, true)
   }, 'shouldn’t find smart apostrophe words when `allowApostrophes` is true')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ["he'll"], null, true)
   }, 'shouldn’t find dumb apostrophe words when `allowApostrophes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['hell'], null, false)
   }, 'should find non-apostrophe words when `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['he’ll'], null, false)
   }, 'should find smart apostrophe words when `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ["he'll"], null, false)
   }, 'should find dumb apostrophe words when `allowApostrophes` is false')
 
   /* The tree contains “selfservice” but not “self-service” */
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'])
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is absent')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'])
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is absent')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, false)
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, false)
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, true)
   }, 'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, true)
   }, 'should find dash words when `allowDashes` is absent and `allowApostrophes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {allowDashes: true})
   }, 'should find non-dash words when `allowDashes` is true')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {allowDashes: true})
   }, 'shouldn’t find dash words when `allowDashes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {allowDashes: false})
   }, 'should find non-dash words when `allowDashes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {allowDashes: false})
   }, 'should find dash words when `allowDashes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: false,
@@ -284,7 +285,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'should find non-dash words when `allowDashes` is true and `allowApostrophes` is false')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: false,
@@ -292,7 +293,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'shouldn’t find dash words when `allowDashes` is true and `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: false,
@@ -300,7 +301,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'should find non-dash words when `allowDashes` is false and `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: false,
@@ -308,7 +309,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is false')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: true,
@@ -316,7 +317,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'should find non-dash words when `allowDashes` is true and `allowApostrophes` is true')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: true,
@@ -324,7 +325,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'shouldn’t find dash words when `allowDashes` is true and `allowApostrophes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['selfservice'], null, {
       allowApostrophes: true,
@@ -332,7 +333,7 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'should find non-dash words when `allowDashes` is false and `allowApostrophes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['self-service'], null, {
       allowApostrophes: true,
@@ -340,27 +341,27 @@ test('search(tree, patterns, handle)', (t) => {
     })
   }, 'should find dash words when `allowDashes` is false and `allowApostrophes` is true')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['this * selfservice'])
   }, 'should support wild cards (#1)')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['that * selfservice'])
   }, 'should support wild cards (#2)')
 
-  t.throws(() => {
+  assert.throws(() => {
     // @ts-expect-error: hush.
     search(tree, ['* selfservice'])
   }, 'should support wild cards (#3)')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['* zelfzervice'])
   }, 'should support wild cards (#4)')
 
-  t.doesNotThrow(() => {
+  assert.doesNotThrow(() => {
     // @ts-expect-error: hush.
     search(tree, ['mellow'])
   }, 'shouldn’t find literals by default')
@@ -369,10 +370,8 @@ test('search(tree, patterns, handle)', (t) => {
     tree,
     ['mellow'],
     () => {
-      t.pass('should find literals when given `allowLiterals`')
+      assert.ok(true, 'should find literals when given `allowLiterals`')
     },
     {allowLiterals: true}
   )
-
-  t.end()
 })
