@@ -7,5 +7,6 @@
  * @typedef {import('./lib/index.js').Options} SearchOptions
  *   Deprecated form of `Options`.
  */
+// To do: next major: remove `SearchOptions`.
 
 export {search} from './lib/index.js'

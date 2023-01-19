@@ -8,7 +8,7 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[nlcst][] utility to search for patterns in a tree.
+[nlcst][] utility to search for phrases in a tree.
 
 ## Contents
 
@@ -17,8 +17,11 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`search(tree, patterns, handler[, allowApostrophes|options])`](#searchtree-patterns-handler-allowapostrophesoptions)
-    *   [`function handler(nodes, index, parent, pattern)`](#function-handlernodes-index-parent-pattern)
+    *   [`search(tree, phrases, handler[, allowApostrophes|options])`](#searchtree-phrases-handler-allowapostrophesoptions)
+    *   [`Handler`](#handler)
+    *   [`Options`](#options)
+    *   [`PhrasesList`](#phraseslist)
+    *   [`PhrasesMap`](#phrasesmap)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Related](#related)
@@ -27,7 +30,7 @@
 
 ## What is this?
 
-This utility can search for patterns (words and phrases) in trees.
+This utility can search for phrases (words and phrases) in trees.
 
 ## When should I use this?
 
@@ -37,7 +40,7 @@ and phrases.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install nlcst-search
@@ -46,14 +49,14 @@ npm install nlcst-search
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {search} from "https://esm.sh/nlcst-search@3"
+import {search} from 'https://esm.sh/nlcst-search@3'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {search} from "https://esm.sh/nlcst-search@3?bundle"
+  import {search} from 'https://esm.sh/nlcst-search@3?bundle'
 </script>
 ```
 
@@ -104,82 +107,104 @@ search(tree, ['do blocklevel'], function(nodes) {
 
 ## API
 
-This package exports the identifier `search`.
+This package exports the identifier [`search`][search].
 There is no default export.
 
-### `search(tree, patterns, handler[, allowApostrophes|options])`
+### `search(tree, phrases, handler[, allowApostrophes|options])`
 
-Search for patterns a [tree][].
+Search for phrases in a tree.
 
 ##### Parameters
 
-###### `node`
+*   `tree` ([`Node`][node])
+    — tree to search
+*   `phrases` ([`PhrasesList`][phraseslist] or [`PhrasesMap`][phrasesmap])
+    — phrases to search for
+*   `handler` ([`Handler`][handler])
+    — handle a match
+*   `allowApostrophes` (`boolean`)
+    — shortcut for `options` of `{allowApostrophes: boolean}`
+*   `options` ([`Options`][options])
+    — configuration
 
-[Tree][] to search in ([`Node`][node]).
+###### Returns
 
-###### `patterns`
+Nothing (`void`).
 
-Patterns to search for (`Array<string>` or `Record<string, unknown>`).
-If an `Object`, uses its keys as patterns.
-Each pattern is a space-separated list of words, where each word is
-[normalized][nlcst-normalize] to remove casing, apostrophes, and dashes.
-Spaces in a pattern mean zero or more white space nodes in the tree.
-Instead of a word, it’s also possible to use a wildcard symbol (`*`, an
-asterisk), that matches any word in a pattern (`alpha * charlie`).
+### `Handler`
 
-###### `handler`
+Handle a match (TypeScript type).
 
-Handler called when a match is found ([`Handler`][fn-handler]).
+###### Parameters
+
+*   `nodes` ([`Array<Node>`][node])
+    — match
+*   `index` (`number`)
+    — index of first node of `nodes` in `parent`
+*   `parent` ([`Node`][node])
+    — parent of `nodes`
+*   `phrase` (`string`)
+    — the phrase that matched
+
+###### Returns
+
+Nothing (`void`).
+
+### `Options`
+
+Configuration (TypeScript type).
+
+##### Fields
 
 ###### `allowApostrophes`
 
-Treated as `options.allowApostrophes`.
+Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
 
-###### `options.allowApostrophes`
+###### `allowDashes`
 
 Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
 
-###### `options.allowDashes`
-
-Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
-
-###### `options.allowLiterals`
+###### `allowLiterals`
 
 Include [literal][] phrases (`boolean`, default: `false`).
 
-### `function handler(nodes, index, parent, pattern)`
+### `PhrasesList`
 
-Handler called when a match is found.
+List of phrases (TypeScript type).
 
-##### Parameters
+Each phrase is a space-separated list of words, where each word will be
+[normalized][nlcst-normalize] to remove casing, apostrophes, and dashes.
+Spaces in a pattern mean one or more whitespace nodes in the tree.
+Instead of a word with letters, it’s also possible to use a wildcard symbol
+(`*`, an asterisk) which will match any word in a pattern (`alpha * charlie`).
 
-###### `nodes`
+###### Type
 
-List of [sibling][]s that match `pattern` ([`Array<Node>`][node]).
+```ts
+type PhrasesList = Array<string>
+```
 
-###### `index`
+### `PhrasesMap`
 
-[Index][] where the match starts in `parent` (`number`).
+Map of phrases (TypeScript type).
 
-###### `parent`
+###### Type
 
-[Parent][] node of `nodes` ([`Node`][node]).
-
-###### `pattern`
-
-The matched pattern (`string`).
+```ts
+type PhrasesMap = Record<string, unknown>
+```
 
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports the additional types `Options`, `PhrasesList`, `PhrasesMap`, and
-`Handler`.
+It exports the additional types [`Handler`][handler], [`Options`][options],
+[`PhrasesList`][phraseslist], and [`PhrasesMap`][phrasesmap].
 
 ## Compatibility
 
 Projects maintained by the unified collective are compatible with all maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+As of now, that is Node.js 14.14+ and 16.0+.
 Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Related
@@ -259,12 +284,12 @@ abide by its terms.
 
 [nlcst-normalize]: https://github.com/syntax-tree/nlcst-normalize
 
-[fn-handler]: #function-handlernodes-index-parent-pattern
+[search]: #searchtree-phrases-handler-allowapostrophesoptions
 
-[tree]: https://github.com/syntax-tree/unist#tree
+[handler]: #handler
 
-[sibling]: https://github.com/syntax-tree/unist#sibling
+[options]: #options
 
-[index]: https://github.com/syntax-tree/unist#index
+[phraseslist]: #phraseslist
 
-[parent]: https://github.com/syntax-tree/unist#parent-1
+[phrasesmap]: #phrasesmap
