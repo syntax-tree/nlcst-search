@@ -5,6 +5,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {search} from './index.js'
+import * as mod from './index.js'
 
 /** @type {Sentence} */
 const tree = {
@@ -84,6 +85,12 @@ const tree = {
 }
 
 test('search', () => {
+  assert.deepEqual(
+    Object.keys(mod).sort(),
+    ['search'],
+    'should expose the public api'
+  )
+
   assert.throws(
     () => {
       // @ts-expect-error runtime.
