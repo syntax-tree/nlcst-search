@@ -34,11 +34,10 @@
     "index.js"
   ],
   "dependencies": {
-    "@types/nlcst": "^1.0.0",
-    "@types/unist": "^2.0.0",
-    "nlcst-is-literal": "^2.0.0",
-    "nlcst-normalize": "^3.0.0",
-    "unist-util-visit": "^4.0.0"
+    "@types/nlcst": "^2.0.0",
+    "nlcst-is-literal": "^3.0.0",
+    "nlcst-normalize": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
