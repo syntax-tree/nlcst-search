@@ -4,7 +4,7 @@
 
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {search} from './index.js'
+import {search} from 'nlcst-search'
 
 test('search', async function (t) {
   /** @type {Sentence} */
@@ -85,7 +85,9 @@ test('search', async function (t) {
   }
 
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('./index.js')).sort(), ['search'])
+    assert.deepEqual(Object.keys(await import('nlcst-search')).sort(), [
+      'search'
+    ])
   })
 
   await t.test('should throw when not given a tree', async function () {
