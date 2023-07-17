@@ -40,7 +40,7 @@ and phrases.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 14.14+ and 16.0+), install with [npm][]:
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install nlcst-search
@@ -107,7 +107,7 @@ search(tree, ['do blocklevel'], function(nodes) {
 
 ## API
 
-This package exports the identifier [`search`][search].
+This package exports the identifier [`search`][api-search].
 There is no default export.
 
 ### `search(tree, phrases, handler[, allowApostrophes|options])`
@@ -118,13 +118,14 @@ Search for phrases in a tree.
 
 *   `tree` ([`Node`][node])
     — tree to search
-*   `phrases` ([`PhrasesList`][phraseslist] or [`PhrasesMap`][phrasesmap])
+*   `phrases` ([`PhrasesList`][api-phrases-list] or
+    [`PhrasesMap`][api-phrases-map])
     — phrases to search for
-*   `handler` ([`Handler`][handler])
+*   `handler` ([`Handler`][api-handler])
     — handle a match
 *   `allowApostrophes` (`boolean`)
     — shortcut for `options` of `{allowApostrophes: boolean}`
-*   `options` ([`Options`][options])
+*   `options` ([`Options`][api-options])
     — configuration
 
 ###### Returns
@@ -154,19 +155,14 @@ Nothing (`undefined`).
 
 Configuration (TypeScript type).
 
-##### Fields
+###### Fields
 
-###### `allowApostrophes`
-
-Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
-
-###### `allowDashes`
-
-Passed to [`nlcst-normalize`][nlcst-normalize] (`boolean`, default: `false`).
-
-###### `allowLiterals`
-
-Include [literal][] phrases (`boolean`, default: `false`).
+*   `allowApostrophes` (`boolean`, default: `false`)
+    — passed to [`nlcst-normalize`][nlcst-normalize]
+*   `allowDashes` (`boolean`, default: `false`)
+    — passed to [`nlcst-normalize`][nlcst-normalize]
+*   `allowLiterals` (`boolean`, default: `false`)
+    — include [literal][] phrases
 
 ### `PhrasesList`
 
@@ -197,15 +193,21 @@ type PhrasesMap = Record<string, unknown>
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports the additional types [`Handler`][handler], [`Options`][options],
-[`PhrasesList`][phraseslist], and [`PhrasesMap`][phrasesmap].
+It exports the additional types
+[`Handler`][api-handler],
+[`Options`][api-options],
+[`PhrasesList`][api-phrases-list], and
+[`PhrasesMap`][api-phrases-map].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 14.14+ and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line, `nlcst-search@^3`,
+compatible with Node.js 12.
 
 ## Related
 
@@ -242,9 +244,9 @@ abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/nlcst-search
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/nlcst-search.svg
+[size-badge]: https://img.shields.io/badge/dynamic/json?label=minzipped%20size&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=nlcst-search
 
-[size]: https://bundlephobia.com/result?p=nlcst-search
+[size]: https://bundlejs.com/?q=nlcst-search
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -284,12 +286,12 @@ abide by its terms.
 
 [nlcst-normalize]: https://github.com/syntax-tree/nlcst-normalize
 
-[search]: #searchtree-phrases-handler-allowapostrophesoptions
+[api-search]: #searchtree-phrases-handler-allowapostrophesoptions
 
-[handler]: #handler
+[api-handler]: #handler
 
-[options]: #options
+[api-options]: #options
 
-[phraseslist]: #phraseslist
+[api-phrases-list]: #phraseslist
 
-[phrasesmap]: #phrasesmap
+[api-phrases-map]: #phrasesmap
