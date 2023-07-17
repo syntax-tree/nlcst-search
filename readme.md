@@ -20,7 +20,6 @@
     *   [`search(tree, phrases, handler[, allowApostrophes|options])`](#searchtree-phrases-handler-allowapostrophesoptions)
     *   [`Handler`](#handler)
     *   [`Options`](#options)
-    *   [`PhrasesList`](#phraseslist)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Related](#related)
@@ -113,6 +112,12 @@ There is no default export.
 
 Search for phrases in a tree.
 
+Each phrase is a space-separated list of words, where each word will be
+[normalized][nlcst-normalize] to remove casing, apostrophes, and dashes.
+Spaces in a pattern mean one or more whitespace nodes in the tree.
+Instead of a word with letters, it’s also possible to use a wildcard symbol
+(`*`, an asterisk) which will match any word in a pattern (`alpha * charlie`).
+
 ##### Parameters
 
 *   `tree` ([`Node`][node])
@@ -162,29 +167,11 @@ Configuration (TypeScript type).
 *   `allowLiterals` (`boolean`, default: `false`)
     — include [literal][] phrases
 
-### `PhrasesList`
-
-List of phrases (TypeScript type).
-
-Each phrase is a space-separated list of words, where each word will be
-[normalized][nlcst-normalize] to remove casing, apostrophes, and dashes.
-Spaces in a pattern mean one or more whitespace nodes in the tree.
-Instead of a word with letters, it’s also possible to use a wildcard symbol
-(`*`, an asterisk) which will match any word in a pattern (`alpha * charlie`).
-
-###### Type
-
-```ts
-type PhrasesList = Array<string>
-```
-
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports the additional types
-[`Handler`][api-handler],
-[`Options`][api-options], and
-[`PhrasesList`][api-phrases-list].
+It exports the additional types [`Handler`][api-handler] and
+[`Options`][api-options].
 
 ## Compatibility
 
@@ -278,5 +265,3 @@ abide by its terms.
 [api-handler]: #handler
 
 [api-options]: #options
-
-[api-phrases-list]: #phraseslist
