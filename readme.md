@@ -47,14 +47,14 @@ npm install nlcst-search
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {search} from 'https://esm.sh/nlcst-search@3'
+import {search} from 'https://esm.sh/nlcst-search@4'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {search} from 'https://esm.sh/nlcst-search@3?bundle'
+  import {search} from 'https://esm.sh/nlcst-search@4?bundle'
 </script>
 ```
 
