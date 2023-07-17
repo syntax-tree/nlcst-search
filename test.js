@@ -121,16 +121,6 @@ test('search', async function (t) {
     })
   })
 
-  await t.test('should search (object)', async function () {
-    search(tree, {do: true}, function (nodes, index, parent, phrase) {
-      const match = [tree.children[2]]
-      assert.deepEqual(nodes, match, 'should pass nodes (object)')
-      assert.equal(index, 2, 'should pass the correct index (object)')
-      assert.equal(parent, tree, 'should pass the parent (object)')
-      assert.equal(phrase, 'do', 'should pass the phrase (object)')
-    })
-  })
-
   await t.test('should search (normalized, 2)', async function () {
     search(tree, ['blocklevel'], function (nodes, index, parent, phrase) {
       const match = [tree.children[4]]

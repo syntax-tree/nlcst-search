@@ -21,7 +21,6 @@
     *   [`Handler`](#handler)
     *   [`Options`](#options)
     *   [`PhrasesList`](#phraseslist)
-    *   [`PhrasesMap`](#phrasesmap)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Related](#related)
@@ -118,8 +117,7 @@ Search for phrases in a tree.
 
 *   `tree` ([`Node`][node])
     — tree to search
-*   `phrases` ([`PhrasesList`][api-phrases-list] or
-    [`PhrasesMap`][api-phrases-map])
+*   `phrases` (`Array<string>`)
     — phrases to search for
 *   `handler` ([`Handler`][api-handler])
     — handle a match
@@ -180,24 +178,13 @@ Instead of a word with letters, it’s also possible to use a wildcard symbol
 type PhrasesList = Array<string>
 ```
 
-### `PhrasesMap`
-
-Map of phrases (TypeScript type).
-
-###### Type
-
-```ts
-type PhrasesMap = Record<string, unknown>
-```
-
 ## Types
 
 This package is fully typed with [TypeScript][].
 It exports the additional types
 [`Handler`][api-handler],
-[`Options`][api-options],
-[`PhrasesList`][api-phrases-list], and
-[`PhrasesMap`][api-phrases-map].
+[`Options`][api-options], and
+[`PhrasesList`][api-phrases-list].
 
 ## Compatibility
 
@@ -293,5 +280,3 @@ abide by its terms.
 [api-options]: #options
 
 [api-phrases-list]: #phraseslist
-
-[api-phrases-map]: #phrasesmap
