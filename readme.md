@@ -17,7 +17,7 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`search(tree, phrases, handler[, allowApostrophes|options])`](#searchtree-phrases-handler-allowapostrophesoptions)
+    *   [`search(tree, phrases, handler[, options])`](#searchtree-phrases-handler-options)
     *   [`Handler`](#handler)
     *   [`Options`](#options)
 *   [Types](#types)
@@ -108,7 +108,7 @@ search(tree, ['do blocklevel'], function(nodes) {
 This package exports the identifier [`search`][api-search].
 There is no default export.
 
-### `search(tree, phrases, handler[, allowApostrophes|options])`
+### `search(tree, phrases, handler[, options])`
 
 Search for phrases in a tree.
 
@@ -126,8 +126,6 @@ Instead of a word with letters, it’s also possible to use a wildcard symbol
     — phrases to search for
 *   `handler` ([`Handler`][api-handler])
     — handle a match
-*   `allowApostrophes` (`boolean`)
-    — shortcut for `options` of `{allowApostrophes: boolean}`
 *   `options` ([`Options`][api-options])
     — configuration
 
@@ -260,7 +258,7 @@ abide by its terms.
 
 [nlcst-normalize]: https://github.com/syntax-tree/nlcst-normalize
 
-[api-search]: #searchtree-phrases-handler-allowapostrophesoptions
+[api-search]: #searchtree-phrases-handler-options
 
 [api-handler]: #handler
 

@@ -215,7 +215,7 @@ test('search', async function (t) {
     'should find non-apostrophe words when `allowApostrophes` is true',
     async function () {
       assert.throws(function () {
-        search(tree, ['hell'], throws, true)
+        search(tree, ['hell'], throws, {allowApostrophes: true})
       })
     }
   )
@@ -224,7 +224,7 @@ test('search', async function (t) {
     'should not find smart apostrophe words when `allowApostrophes` is true',
     async function () {
       assert.doesNotThrow(function () {
-        search(tree, ['he’ll'], throws, true)
+        search(tree, ['he’ll'], throws, {allowApostrophes: true})
       })
     }
   )
@@ -233,7 +233,7 @@ test('search', async function (t) {
     'should not find dumb apostrophe words when `allowApostrophes` is true',
     async function () {
       assert.doesNotThrow(function () {
-        search(tree, ["he'll"], throws, true)
+        search(tree, ["he'll"], throws, {allowApostrophes: true})
       })
     }
   )
@@ -242,7 +242,7 @@ test('search', async function (t) {
     'should find non-apostrophe words when `allowApostrophes` is false',
     async function () {
       assert.throws(function () {
-        search(tree, ['hell'], throws, false)
+        search(tree, ['hell'], throws, {allowApostrophes: false})
       })
     }
   )
@@ -251,7 +251,7 @@ test('search', async function (t) {
     'should find smart apostrophe words when `allowApostrophes` is false',
     async function () {
       assert.throws(function () {
-        search(tree, ['he’ll'], throws, false)
+        search(tree, ['he’ll'], throws, {allowApostrophes: false})
       })
     }
   )
@@ -260,7 +260,7 @@ test('search', async function (t) {
     'should find dumb apostrophe words when `allowApostrophes` is false',
     async function () {
       assert.throws(function () {
-        search(tree, ["he'll"], throws, false)
+        search(tree, ["he'll"], throws, {allowApostrophes: false})
       })
     }
   )
@@ -288,7 +288,7 @@ test('search', async function (t) {
     'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is false',
     async function () {
       assert.throws(function () {
-        search(tree, ['selfservice'], throws, false)
+        search(tree, ['selfservice'], throws, {allowApostrophes: false})
       })
     }
   )
@@ -297,7 +297,7 @@ test('search', async function (t) {
     'should find dash words when `allowDashes` is absent and `allowApostrophes` is false',
     async function () {
       assert.throws(function () {
-        search(tree, ['self-service'], throws, false)
+        search(tree, ['self-service'], throws, {allowApostrophes: false})
       })
     }
   )
@@ -306,7 +306,7 @@ test('search', async function (t) {
     'should find non-dash words when `allowDashes` is absent and `allowApostrophes` is true',
     async function () {
       assert.throws(function () {
-        search(tree, ['selfservice'], throws, true)
+        search(tree, ['selfservice'], throws, {allowApostrophes: true})
       })
     }
   )
@@ -315,7 +315,7 @@ test('search', async function (t) {
     'should find dash words when `allowDashes` is absent and `allowApostrophes` is true',
     async function () {
       assert.throws(function () {
-        search(tree, ['self-service'], throws, true)
+        search(tree, ['self-service'], throws, {allowApostrophes: true})
       })
     }
   )
