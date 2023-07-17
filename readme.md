@@ -129,7 +129,7 @@ Search for phrases in a tree.
 
 ###### Returns
 
-Nothing (`void`).
+Nothing (`undefined`).
 
 ### `Handler`
 
@@ -148,7 +148,7 @@ Handle a match (TypeScript type).
 
 ###### Returns
 
-Nothing (`void`).
+Nothing (`undefined`).
 
 ### `Options`
 
